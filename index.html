@@ -6,13 +6,353 @@
   <title>SK Foods - Wholesale Chicken & Poultry Supply Portal (B2B)</title>
   <meta name="description" content="Direct Wholesale Chicken & Poultry Supply portal for Restaurants, Hotels, Dhabas, Mess and Caterers by SK Foods. Night ordering for early morning 5:00 AM delivery.">
   
-  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍗</text></svg>">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       SK FOODS - SELF-CONTAINED ZERO-CACHE MASTER DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --brand-red: #e11d48;
+      --brand-red-dark: #be123c;
+      --brand-red-deep: #881337;
+      --brand-gradient: linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #be123c 100%);
+      --brand-glow: 0 8px 25px rgba(225, 29, 72, 0.35);
+      
+      --bg-dark-deep: #090d16;
+      --bg-dark-surface: #111827;
+      --bg-dark-card: #1f2937;
+      --border-dark: #374151;
+      
+      --gold: #f59e0b;
+      --gold-dark: #d97706;
+      
+      --bg-body: #f8fafc;
+      --bg-card-light: #ffffff;
+      --border-light: #e2e8f0;
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      
+      --font-heading: 'Outfit', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.12);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 100px;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 800; color: var(--text-main); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* Top Notice Bar */
+    .top-notice-bar {
+      background: linear-gradient(90deg, #090d16 0%, #1e1b4b 50%, #090d16 100%);
+      color: #fbbf24;
+      padding: 0.65rem 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+    }
+    .notice-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .notice-tag { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .pulse-dot {
+      width: 8px; height: 8px; background: #22c55e; border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    .notice-phone-link {
+      color: #ffffff; text-decoration: none; background: rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.8rem;
+      font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; transition: var(--transition);
+    }
+    .notice-phone-link:hover { background: var(--brand-red); color: #fff; }
+
+    /* Header */
+    .main-header {
+      background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      color: white; padding: 0.85rem 0; position: sticky; top: 0; z-index: 60;
+      border-bottom: 2px solid var(--brand-red); box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .header-flex { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .brand-wrapper { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: white; }
+    .brand-logo-icon {
+      width: 48px; height: 48px; background: var(--brand-gradient); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: white;
+      box-shadow: var(--brand-glow);
+    }
+    .brand-text h1 { font-size: 1.45rem; color: white; margin: 0; line-height: 1.1; }
+    .brand-text span { font-size: 0.72rem; font-weight: 700; color: #fb7185; letter-spacing: 1px; text-transform: uppercase; }
+    .header-badge-hotel {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.45rem 0.9rem; border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 700;
+      color: #e2e8f0; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: var(--transition);
+    }
+    .header-badge-hotel:hover { background: rgba(225, 29, 72, 0.2); border-color: var(--brand-red); }
+
+    /* Hero Banner */
+    .hero-portal-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #311018 100%);
+      color: white; border-radius: var(--radius-lg); padding: 2rem 1.75rem; margin: 1.5rem auto 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06); position: relative; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero-banner-content { max-width: 720px; position: relative; z-index: 2; }
+    .hero-badge-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(225, 29, 72, 0.25);
+      color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.4); padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 800; margin-bottom: 0.85rem;
+    }
+    .hero-banner-title { font-size: 2.1rem; color: #ffffff; line-height: 1.2; margin-bottom: 0.6rem; }
+    .hero-banner-title span {
+      background: linear-gradient(90deg, #fb7185, #f59e0b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-banner-sub { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1.5rem; line-height: 1.6; }
+    .hero-stats-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.85rem;
+      padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .stat-box {
+      background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08); padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.6rem;
+    }
+    .stat-icon { font-size: 1.3rem; color: #fb7185; }
+    .stat-info h5 { font-size: 0.88rem; color: #ffffff; margin: 0; }
+    .stat-info p { font-size: 0.72rem; color: #94a3b8; margin: 0; }
+
+    /* Hotel Profile Bar */
+    .profile-card-bar {
+      background: #ffffff; border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+      border: 1.5px solid var(--border-light); box-shadow: var(--shadow-subtle); display: flex;
+      justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .profile-card-left { display: flex; align-items: center; gap: 0.85rem; }
+    .profile-avatar {
+      width: 44px; height: 44px; background: #fee2e2; color: var(--brand-red); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; font-size: 1.35rem;
+    }
+    .profile-texts h4 { font-size: 1rem; color: var(--text-main); margin-bottom: 0.15rem; }
+    .profile-texts p { font-size: 0.82rem; color: var(--text-muted); }
+    .btn-edit-profile {
+      background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-light);
+      padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: var(--transition);
+    }
+    .btn-edit-profile:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
+
+    /* Category Toolbar */
+    .catalog-toolbar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .category-nav-pills { display: flex; align-items: center; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem; scrollbar-width: none; }
+    .category-nav-pills::-webkit-scrollbar { display: none; }
+    .cat-btn {
+      background: #ffffff; border: 1.5px solid var(--border-light); color: var(--text-main);
+      padding: 0.55rem 1.1rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700;
+      white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: var(--transition);
+    }
+    .cat-btn:hover { border-color: var(--brand-red); color: var(--brand-red); }
+    .cat-btn.active {
+      background: var(--brand-gradient); color: white; border-color: transparent; box-shadow: 0 4px 14px rgba(225, 29, 72, 0.3);
+    }
+    .search-box-wrap { flex: 1; max-width: 320px; position: relative; }
+    .search-input-field {
+      width: 100%; background: white; border: 1.5px solid var(--border-light);
+      padding: 0.55rem 1rem 0.55rem 2.25rem; border-radius: var(--radius-full); font-size: 0.88rem;
+      font-family: inherit; transition: var(--transition);
+    }
+    .search-input-field:focus { outline: none; border-color: var(--brand-red); box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12); }
+    .search-icon-pos { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-light); }
+
+    /* Poultry Items Grid */
+    .poultry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem; }
+    .item-card {
+      background: #ffffff; border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+      padding: 1.15rem; box-shadow: var(--shadow-subtle); transition: var(--transition);
+      display: flex; flex-direction: column; position: relative; overflow: hidden;
+    }
+    .item-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #cbd5e1; }
+    .item-card.has-ordered {
+      border-color: var(--brand-red); background: #fffcfc; box-shadow: 0 6px 20px rgba(225, 29, 72, 0.1);
+    }
+    .item-card.has-ordered::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--brand-gradient);
+    }
+    .item-card-header { display: flex; gap: 1rem; margin-bottom: 1rem; }
+    .item-media {
+      width: 90px; height: 90px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0; background: #f1f5f9;
+    }
+    .item-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .item-card:hover .item-media img { transform: scale(1.08); }
+    .item-details { flex: 1; }
+    .item-title { font-size: 1.05rem; font-weight: 800; color: var(--text-main); line-height: 1.3; margin-bottom: 0.35rem; }
+    .item-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+    .item-unit-badge {
+      display: inline-block; background: #f1f5f9; color: #334155; font-size: 0.72rem;
+      font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 4px; margin-top: 0.4rem;
+    }
+
+    /* Stepper */
+    .stepper-row {
+      background: #f8fafc; border: 1.5px solid var(--border-light); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.75rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;
+    }
+    .stepper-title { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
+    .stepper-actions { display: flex; align-items: center; gap: 0.4rem; }
+    .btn-step {
+      width: 42px; height: 42px; background: white; border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm); font-size: 1.3rem; font-weight: 800; color: var(--text-main);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);
+    }
+    .btn-step:hover { border-color: var(--brand-red); color: var(--brand-red); }
+    .btn-step:active { background: var(--brand-red); color: white; transform: scale(0.92); }
+    .input-stepper-val {
+      width: 75px; height: 42px; text-align: center; font-size: 1.25rem; font-weight: 900;
+      font-family: var(--font-heading); color: var(--brand-red-dark); border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm); background: #ffffff;
+    }
+    .input-stepper-val:focus { outline: none; border-color: var(--brand-red); box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15); }
+
+    /* Bulk Chips */
+    .bulk-chips-wrapper { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+    .bulk-chip-title { font-size: 0.75rem; font-weight: 700; color: var(--text-light); }
+    .bulk-chip {
+      background: #ffffff; border: 1px solid var(--border-light); color: var(--text-main);
+      padding: 0.32rem 0.75rem; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 800;
+      cursor: pointer; transition: var(--transition);
+    }
+    .bulk-chip:hover { background: #fee2e2; border-color: var(--brand-red); color: var(--brand-red); }
+    .bulk-chip:active { background: var(--brand-red); color: white; }
+    .chip-clear { background: transparent; color: #ef4444; border: 1px dashed #fca5a5; }
+
+    /* Sticky Bottom Bar */
+    .mobile-sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: white;
+      padding: 0.85rem 1.25rem; z-index: 80; border-top: 2px solid var(--brand-red);
+      box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.35);
+    }
+    .sticky-bar-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .sticky-data-col { display: flex; flex-direction: column; }
+    .sticky-weight-headline {
+      font-size: 1.35rem; font-weight: 900; font-family: var(--font-heading); color: #fda4af;
+      display: flex; align-items: center; gap: 0.5rem; line-height: 1.1;
+    }
+    .sticky-sub-info { font-size: 0.78rem; color: #94a3b8; font-weight: 600; margin-top: 0.2rem; }
+    .btn-submit-order-trigger {
+      background: var(--brand-gradient); color: white; border: none; padding: 0.85rem 1.6rem;
+      border-radius: var(--radius-md); font-size: 1.05rem; font-weight: 900; font-family: var(--font-heading);
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; box-shadow: var(--brand-glow);
+      transition: var(--transition); white-space: nowrap;
+    }
+    .btn-submit-order-trigger:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(225, 29, 72, 0.5); }
+    .btn-submit-order-trigger:disabled { background: #334155; box-shadow: none; cursor: not-allowed; opacity: 0.5; transform: none; }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px);
+      z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1rem;
+      opacity: 0; visibility: hidden; transition: var(--transition);
+    }
+    .modal-backdrop.active { opacity: 1; visibility: visible; }
+    .modal-container-box {
+      background: #ffffff; border-radius: var(--radius-lg); max-width: 620px; width: 100%;
+      max-height: 92vh; overflow-y: auto; position: relative; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      padding: 1.75rem; border: 1px solid var(--border-light);
+    }
+    .modal-btn-close {
+      position: absolute; top: 1.25rem; right: 1.25rem; background: #f1f5f9; border: none;
+      width: 36px; height: 36px; border-radius: var(--radius-full); display: flex; align-items: center;
+      justify-content: center; font-size: 1.1rem; color: var(--text-muted); cursor: pointer;
+    }
+    .modal-btn-close:hover { background: #fee2e2; color: var(--brand-red); }
+    .modal-header-title { font-size: 1.4rem; color: var(--text-main); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .modal-header-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    /* Receipt Box */
+    .receipt-summary-box { background: #f8fafc; border: 1.5px solid var(--border-light); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.5rem; }
+    .receipt-header-row {
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;
+      font-weight: 800; color: var(--text-light); text-transform: uppercase; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-light); margin-bottom: 0.5rem;
+    }
+    .receipt-item-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.92rem; padding: 0.4rem 0; border-bottom: 1px dashed var(--border-light); }
+    .receipt-item-row:last-child { border-bottom: none; }
+    .receipt-item-name { font-weight: 700; color: var(--text-main); }
+    .receipt-item-val { font-weight: 900; color: var(--brand-red-dark); font-family: var(--font-heading); }
+    .receipt-grand-total {
+      background: #fee2e2; padding: 0.75rem 1rem; border-radius: 6px; display: flex;
+      justify-content: space-between; align-items: center; margin-top: 0.75rem;
+    }
+    .grand-total-label { font-size: 0.95rem; font-weight: 900; color: var(--brand-red-deep); }
+    .grand-total-val { font-size: 1.3rem; font-weight: 900; color: var(--brand-red-deep); font-family: var(--font-heading); }
+
+    /* Form */
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .form-group-field { margin-bottom: 1rem; }
+    .form-field-label { display: block; font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem; }
+    .form-input-ctrl, .form-select-ctrl, .form-textarea-ctrl {
+      width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm); font-size: 0.92rem; font-family: inherit; background: #ffffff;
+      color: var(--text-main); transition: var(--transition);
+    }
+    .form-input-ctrl:focus, .form-select-ctrl:focus, .form-textarea-ctrl:focus {
+      outline: none; border-color: var(--brand-red); box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12);
+    }
+    .btn-confirm-final-submit {
+      width: 100%; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white;
+      border: none; padding: 0.95rem; border-radius: var(--radius-md); font-size: 1.1rem;
+      font-weight: 900; font-family: var(--font-heading); cursor: pointer; display: flex;
+      align-items: center; justify-content: center; gap: 0.6rem; box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+      margin-top: 1.25rem; transition: var(--transition);
+    }
+    .btn-confirm-final-submit:hover { background: #15803d; transform: translateY(-2px); }
+
+    /* Toast */
+    .toast-stack { position: fixed; top: 24px; right: 24px; z-index: 150; display: flex; flex-direction: column; gap: 0.6rem; }
+    .toast-msg-card {
+      background: var(--bg-dark-surface); color: white; padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-md); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 0.65rem;
+      border-left: 4px solid var(--brand-red);
+    }
+
+    @media (max-width: 768px) {
+      .hero-banner-title { font-size: 1.65rem; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .poultry-grid { grid-template-columns: 1fr; }
+      .catalog-toolbar { flex-direction: column; align-items: stretch; }
+      .search-box-wrap { max-width: 100%; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- 1. Top Night Notice Bar -->
+  <!-- 1. Top Night Cutoff Notice Bar -->
   <aside class="top-notice-bar">
     <div class="container notice-flex">
       <div class="notice-tag">
@@ -27,7 +367,7 @@
     </div>
   </aside>
 
-  <!-- 2. Main Header -->
+  <!-- 2. Luxury Header -->
   <header class="main-header">
     <div class="container header-flex">
       <a href="#" class="brand-wrapper">
@@ -110,7 +450,7 @@
       </button>
     </section>
 
-    <!-- 5. Category Pills & Search Toolbar -->
+    <!-- 5. Category Toolbar & Search -->
     <section class="catalog-toolbar">
       <div class="category-nav-pills" id="category-pills-container">
         <button class="cat-btn active" onclick="filterByCategory('all', this)">
@@ -147,7 +487,7 @@
 
     <!-- 6. Poultry Items Grid -->
     <section class="poultry-grid" id="poultry-items-grid">
-      <!-- Rendered dynamically from data.js -->
+      <!-- Dynamically populated -->
     </section>
   </main>
 
@@ -170,7 +510,7 @@
     </div>
   </aside>
 
-  <!-- 8. Order Review & Confirmation Modal -->
+  <!-- 8. Order Review Modal -->
   <div class="modal-backdrop" id="order-modal-overlay" onclick="closeOrderModal(event)">
     <div class="modal-container-box" id="order-modal-box">
       <button class="modal-btn-close" onclick="closeOrderModal()" aria-label="Close modal">
@@ -183,12 +523,10 @@
       </h3>
       <p class="modal-header-desc">Verify your selected items, cutting preference, and early morning delivery slot.</p>
 
-      <!-- Selected Items Summary List -->
-      <div class="receipt-summary-box" id="modal-review-items-list">
-        <!-- Dynamically rendered -->
-      </div>
+      <!-- Receipt summary box -->
+      <div class="receipt-summary-box" id="modal-review-items-list"></div>
 
-      <!-- Hotel Details & Preferences Form -->
+      <!-- Hotel Details Form -->
       <form id="b2b-order-form" onsubmit="handleOrderSubmission(event)">
         <div class="form-row-2">
           <div class="form-group-field">
@@ -197,9 +535,7 @@
           </div>
           <div class="form-group-field">
             <label class="form-field-label" for="form-hotel-type">Business Category *</label>
-            <select id="form-hotel-type" class="form-select-ctrl" required>
-              <!-- Populated from data.js -->
-            </select>
+            <select id="form-hotel-type" class="form-select-ctrl" required></select>
           </div>
         </div>
 
@@ -222,15 +558,11 @@
         <div class="form-row-2">
           <div class="form-group-field">
             <label class="form-field-label" for="form-delivery-slot">Required Delivery Time Slot *</label>
-            <select id="form-delivery-slot" class="form-select-ctrl" required>
-              <!-- Populated from data.js -->
-            </select>
+            <select id="form-delivery-slot" class="form-select-ctrl" required></select>
           </div>
           <div class="form-group-field">
             <label class="form-field-label" for="form-cutting-style">Cutting & Prep Style *</label>
-            <select id="form-cutting-style" class="form-select-ctrl" required>
-              <!-- Populated from data.js -->
-            </select>
+            <select id="form-cutting-style" class="form-select-ctrl" required></select>
           </div>
         </div>
 
@@ -239,7 +571,6 @@
           <input type="text" id="form-notes" class="form-input-ctrl" placeholder="e.g. Extra clean, pack in 5kg bags separately">
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn-confirm-final-submit" id="submit-order-btn">
           <i class="bi bi-send-check-fill"></i>
           <span>Confirm & Send Order (Google Sheets + WhatsApp)</span>
@@ -248,7 +579,7 @@
     </div>
   </div>
 
-  <!-- 9. Quick Hotel Profile Modal -->
+  <!-- 9. Quick Profile Modal -->
   <div class="modal-backdrop" id="profile-modal-overlay" onclick="closeProfileModal(event)">
     <div class="modal-container-box">
       <button class="modal-btn-close" onclick="closeProfileModal()"><i class="bi bi-x-lg"></i></button>
@@ -278,11 +609,573 @@
     </div>
   </div>
 
-  <!-- 10. Toast Notification Stack -->
+  <!-- Hidden Iframe for Fail-Proof Google Sheets Sync -->
+  <iframe name="hidden_sheet_iframe" id="hidden_sheet_iframe" style="display:none;"></iframe>
+
+  <!-- Toast Stack -->
   <div class="toast-stack" id="toast-container"></div>
 
-  <!-- Scripts -->
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <!-- EMBEDDED COMPLETE DATA & LOGIC (Guaranteed Zero-Cache Execution) -->
+  <script>
+    const STORE_CONFIG = {
+      storeName: "SK Foods",
+      supplyTitle: "Wholesale Poultry & Chicken Supply (B2B)",
+      phone: "+91 96297 73923",
+      whatsappNumber: "919629773923",
+      googleSheetScriptUrl: "https://script.google.com/macros/s/AKfycbw1ER0bod32XB3wIqH1eZNlxJVDpNyOMTGoYGzlEomRVisEMcEdCrOkWIv6NlVXt33y/exec"
+    };
+
+    const HOTEL_TYPES = [
+      "Non-Veg Restaurant (அசைவ உணவகம்)",
+      "Biryani Speciality Hotel (பிரியாணி ஹோட்டல்)",
+      "Dhaba / Highway Restaurant (தாபா)",
+      "Mess / Military Hotel (மெஸ் / மிலிட்டரி ஹோட்டல்)",
+      "Fast Food / Chinese Joint (பாஸ்ட் புட்)",
+      "Catering / Event Functions (கேட்டரிங்)",
+      "Tea & Snack Bar / Mini Hotel (மினி ஹோட்டல்)",
+      "Other Wholesale Customer"
+    ];
+
+    const DELIVERY_SLOTS = [
+      "Early Morning 4:30 AM - 5:30 AM (முாலை 4:30 - 5:30)",
+      "Early Morning 5:30 AM - 6:30 AM (முாலை 5:30 - 6:30)",
+      "Morning 6:30 AM - 7:30 AM (காலை 6:30 - 7:30)",
+      "Morning 7:30 AM - 8:30 AM (காலை 7:30 - 8:30)",
+      "Midday / Lunch Batch 11:30 AM (மதிய சப்ளை 11:30)"
+    ];
+
+    const CUTTING_STYLES = [
+      "Standard Curry Cut (சாதாரண குழம்பு கட்)",
+      "Small Curry Cut (சிறிய கட் - கிரேவி & வறுவல்)",
+      "Biryani 4-Pieces Cut (பிரியாணி 4 பீஸ் கட்)",
+      "Biryani 8-Pieces Cut (பிரியாணி 8 பீஸ் கட்)",
+      "Chilli / 65 Small Cut (சில்லி / 65 கட்)",
+      "Whole Cleaned Bird (முழு கோழி கட் இன்றி)",
+      "Custom / See Special Notes (குறிப்பில் குறிப்பிடப்பட்டுள்ளது)"
+    ];
+
+    const POULTRY_ITEMS = [
+      {
+        id: "item_broiler_skinless",
+        sheetColumnName: "Broiler Skinless (Kg)",
+        name: "Broiler Chicken - Skinless (ஸ்கின்லெஸ் பிராய்லர்)",
+        category: "broiler",
+        unit: "Kg",
+        quickAddKgs: [5, 10, 25, 50],
+        image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
+        description: "Fresh skin-out broiler chicken, hygienically dressed and cleaned for restaurants & gravies."
+      },
+      {
+        id: "item_broiler_withskin",
+        sheetColumnName: "Broiler With Skin (Kg)",
+        name: "Broiler Chicken - With Skin (தோலுடன் பிராய்லர்)",
+        category: "broiler",
+        unit: "Kg",
+        quickAddKgs: [5, 10, 25, 50],
+        image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
+        description: "Skin-on whole dressed broiler chicken. Ideal for roast, grill, tandoor and dhabas."
+      },
+      {
+        id: "item_boneless_breast",
+        sheetColumnName: "Boneless Breast (Kg)",
+        name: "Boneless Breast Fillet (போன்லெஸ் பிரஸ்ட் கட்)",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
+        description: "100% tender boneless breast meat. Perfect for Chilli Chicken, Chicken 65 & Shawarma."
+      },
+      {
+        id: "item_leg_thigh_cuts",
+        sheetColumnName: "Leg & Thigh Pieces (Kg)",
+        name: "Leg & Thigh Pieces (லெக் & தொடை பீஸ்)",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
+        description: "Juicy leg quarters and drumsticks. Preferred for Biryani, Leg Roast, and Tandoori."
+      },
+      {
+        id: "item_chicken_lollipop",
+        sheetColumnName: "Chicken Lollipop (Kg/Pcs)",
+        name: "Chicken Lollipop Cuts (சிக்கன் லாலிபாப்)",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 15],
+        image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
+        description: "Frenched winglets expertly trimmed for restaurant Chicken Lollipop appetizers."
+      },
+      {
+        id: "item_chicken_wings",
+        sheetColumnName: "Chicken Wings (Kg)",
+        name: "Chicken Wings (சிக்கன் விங்ஸ்)",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
+        description: "Full tender wings. Best suited for Fried Chicken, Chinese gravies & snacks."
+      },
+      {
+        id: "item_country_chicken",
+        sheetColumnName: "Country Chicken / Naatu Kozhi (Kg)",
+        name: "Country Chicken / Naatu Kozhi (நாட்டுக்கோழி)",
+        category: "country-special",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1548567117-0429f55e54d8?auto=format&fit=crop&w=500&q=80",
+        description: "Genuine free-range farm country chicken. Dressed fresh for authentic soup and kulambu."
+      },
+      {
+        id: "item_liver_gizzard",
+        sheetColumnName: "Liver & Gizzard (Kg)",
+        name: "Chicken Liver & Gizzard (ஈரல் & ஜிizzard)",
+        category: "offal",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 15],
+        image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
+        description: "Freshly cleaned chicken liver and gizzard. High demand for fry, gravy, and side dishes."
+      },
+      {
+        id: "item_chicken_keema",
+        sheetColumnName: "Chicken Minced / Keema (Kg)",
+        name: "Chicken Minced / Keema (சிக்கன் கீமா)",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
+        description: "Fine minced chicken meat for Keema dosa, rolls, samosa fillings & meatballs."
+      },
+      {
+        id: "item_farm_eggs_tray",
+        sheetColumnName: "Farm Eggs (Trays - 30 Pcs)",
+        name: "Farm Fresh Eggs Tray (முட்டை டிரே - 30 pcs)",
+        category: "eggs",
+        unit: "Tray",
+        quickAddKgs: [1, 2, 5, 10],
+        image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=500&q=80",
+        description: "Standard 30-eggs poultry tray. Fresh daily supply for egg fried rice, parotta & biryani."
+      }
+    ];
+
+    let orderQuantities = {};
+    let hotelProfile = JSON.parse(localStorage.getItem('sk_hotel_profile') || '{}');
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initB2BPortal();
+    });
+
+    function initB2BPortal() {
+      renderDropdownOptions();
+      renderPoultryItems();
+      updateHotelProfileBanner();
+      updateStickySummary();
+    }
+
+    function renderDropdownOptions() {
+      const hotelTypeSelect = document.getElementById('form-hotel-type');
+      if (hotelTypeSelect) hotelTypeSelect.innerHTML = HOTEL_TYPES.map(t => `<option value="${t}">${t}</option>`).join('');
+      const slotSelect = document.getElementById('form-delivery-slot');
+      if (slotSelect) slotSelect.innerHTML = DELIVERY_SLOTS.map(s => `<option value="${s}">${s}</option>`).join('');
+      const cuttingSelect = document.getElementById('form-cutting-style');
+      if (cuttingSelect) cuttingSelect.innerHTML = CUTTING_STYLES.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    function filterByCategory(categoryId, buttonElement) {
+      activeCategory = categoryId;
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      if (buttonElement) buttonElement.classList.add('active');
+      renderPoultryItems();
+    }
+
+    function handleSearchFilter(query) {
+      searchQuery = query.toLowerCase().trim();
+      renderPoultryItems();
+    }
+
+    function renderPoultryItems() {
+      const grid = document.getElementById('poultry-items-grid');
+      if (!grid) return;
+
+      const filteredItems = POULTRY_ITEMS.filter(item => {
+        const matchesCategory = (activeCategory === 'all') || (item.category === activeCategory);
+        const matchesSearch = (!searchQuery) || item.name.toLowerCase().includes(searchQuery) || item.description.toLowerCase().includes(searchQuery);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filteredItems.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 3.5rem 1rem; background: white; border-radius: 16px; border: 1.5px dashed #cbd5e1;">
+            <i class="bi bi-search" style="font-size: 2.5rem; color: #94a3b8; display: block; margin-bottom: 0.75rem;"></i>
+            <h4 style="color: var(--text-main); margin-bottom: 0.35rem;">No poultry items match your search</h4>
+            <button class="btn-step" style="width: auto; padding: 0.5rem 1.25rem; margin-top: 1rem; font-size: 0.88rem; background: var(--brand-red); color: white; border: none;" onclick="filterByCategory('all'); document.getElementById('item-search-input').value='';">
+              Show All Items
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filteredItems.map(item => {
+        const qty = orderQuantities[item.id] || 0;
+        const hasOrderedClass = qty > 0 ? 'has-ordered' : '';
+
+        return `
+          <div class="item-card ${hasOrderedClass}" id="card-${item.id}">
+            <div class="item-card-header">
+              <div class="item-media">
+                <img src="${item.image}" alt="${item.name}" loading="lazy">
+              </div>
+              <div class="item-details">
+                <h4 class="item-title">${item.name}</h4>
+                <p class="item-desc">${item.description}</p>
+                <span class="item-unit-badge">Unit: ${item.unit}</span>
+              </div>
+            </div>
+
+            <div class="stepper-row">
+              <span class="stepper-title">Required ${item.unit}:</span>
+              <div class="stepper-actions">
+                <button type="button" class="btn-step" onclick="adjustItemQty('${item.id}', -1)">-</button>
+                <input type="number" class="input-stepper-val" id="input-${item.id}" value="${qty}" min="0" step="1" oninput="onManualQtyChange('${item.id}', this.value)">
+                <button type="button" class="btn-step" onclick="adjustItemQty('${item.id}', 1)">+</button>
+              </div>
+            </div>
+
+            <div class="bulk-chips-wrapper">
+              <span class="bulk-chip-title">Quick Add:</span>
+              ${item.quickAddKgs.map(k => `
+                <button type="button" class="bulk-chip" onclick="quickSetQty('${item.id}', ${k})">+${k} ${item.unit}</button>
+              `).join('')}
+              ${qty > 0 ? `<button type="button" class="bulk-chip chip-clear" onclick="quickSetQty('${item.id}', 0)">Clear</button>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function adjustItemQty(itemId, delta) {
+      const current = orderQuantities[itemId] || 0;
+      setQty(itemId, Math.max(0, current + delta));
+    }
+
+    function quickSetQty(itemId, value) {
+      if (value === 0) {
+        setQty(itemId, 0);
+      } else {
+        const current = orderQuantities[itemId] || 0;
+        setQty(itemId, current + value);
+      }
+    }
+
+    function onManualQtyChange(itemId, val) {
+      const parsed = parseFloat(val);
+      const qty = isNaN(parsed) || parsed < 0 ? 0 : parsed;
+      orderQuantities[itemId] = qty;
+      updateCardState(itemId, qty);
+      updateStickySummary();
+    }
+
+    function setQty(itemId, qty) {
+      orderQuantities[itemId] = qty;
+      const input = document.getElementById(`input-${itemId}`);
+      if (input) input.value = qty;
+      updateCardState(itemId, qty);
+      updateStickySummary();
+    }
+
+    function updateCardState(itemId, qty) {
+      const card = document.getElementById(`card-${itemId}`);
+      if (card) {
+        if (qty > 0) card.classList.add('has-ordered');
+        else card.classList.remove('has-ordered');
+      }
+    }
+
+    function updateStickySummary() {
+      let totalKgs = 0;
+      let eggTrays = 0;
+      let itemsCount = 0;
+
+      POULTRY_ITEMS.forEach(item => {
+        const qty = orderQuantities[item.id] || 0;
+        if (qty > 0) {
+          itemsCount += 1;
+          if (item.unit === 'Tray') eggTrays += qty;
+          else totalKgs += qty;
+        }
+      });
+
+      const qtyText = document.getElementById('sticky-total-qty-text');
+      const countText = document.getElementById('sticky-items-count-text');
+      const orderBtn = document.getElementById('open-order-modal-btn');
+
+      let displaySummary = totalKgs > 0 && eggTrays > 0 ? `${totalKgs} Kg + ${eggTrays} Trays` : (totalKgs > 0 ? `${totalKgs} Kg Weight` : (eggTrays > 0 ? `${eggTrays} Trays` : `0.0 Kg`));
+
+      if (qtyText) qtyText.textContent = displaySummary;
+      if (countText) countText.textContent = `${itemsCount} item${itemsCount === 1 ? '' : 's'} selected`;
+
+      if (orderBtn) {
+        if (itemsCount > 0) orderBtn.removeAttribute('disabled');
+        else orderBtn.setAttribute('disabled', 'true');
+      }
+    }
+
+    function openOrderModal() {
+      const selectedItems = POULTRY_ITEMS.filter(item => (orderQuantities[item.id] || 0) > 0);
+      if (selectedItems.length === 0) {
+        showToast('Please select at least one item quantity to place an order.');
+        return;
+      }
+
+      let totalKgs = 0;
+      let eggTrays = 0;
+
+      selectedItems.forEach(item => {
+        const qty = orderQuantities[item.id] || 0;
+        if (item.unit === 'Tray') eggTrays += qty;
+        else totalKgs += qty;
+      });
+
+      const reviewList = document.getElementById('modal-review-items-list');
+      if (reviewList) {
+        let rowsHtml = `
+          <div class="receipt-header-row">
+            <span>Selected Item</span>
+            <span>Quantity (Units)</span>
+          </div>
+        `;
+
+        rowsHtml += selectedItems.map(item => `
+          <div class="receipt-item-row">
+            <span class="receipt-item-name">${item.name}</span>
+            <span class="receipt-item-val">${orderQuantities[item.id]} ${item.unit}</span>
+          </div>
+        `).join('');
+
+        let totalText = totalKgs > 0 && eggTrays > 0 ? `${totalKgs} Kg + ${eggTrays} Trays` : (totalKgs > 0 ? `${totalKgs} Kg` : `${eggTrays} Trays`);
+        rowsHtml += `
+          <div class="receipt-grand-total">
+            <span class="grand-total-label">⭐ TOTAL ORDER WEIGHT:</span>
+            <span class="grand-total-val">${totalText}</span>
+          </div>
+        `;
+        reviewList.innerHTML = rowsHtml;
+      }
+
+      if (hotelProfile.hotelName) {
+        document.getElementById('form-hotel-name').value = hotelProfile.hotelName || '';
+        document.getElementById('form-hotel-type').value = hotelProfile.hotelType || HOTEL_TYPES[0];
+        document.getElementById('form-contact-person').value = hotelProfile.contactPerson || '';
+        document.getElementById('form-phone').value = hotelProfile.phone || '';
+        document.getElementById('form-address').value = hotelProfile.address || '';
+      }
+
+      const overlay = document.getElementById('order-modal-overlay');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOrderModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      const overlay = document.getElementById('order-modal-overlay');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateHotelProfileBanner() {
+      const hotelNameEl = document.getElementById('banner-hotel-name');
+      const hotelMetaEl = document.getElementById('banner-hotel-meta');
+      const savedHotelLabel = document.getElementById('saved-hotel-label');
+
+      if (hotelProfile.hotelName) {
+        if (hotelNameEl) hotelNameEl.textContent = `🏨 ${hotelProfile.hotelName}`;
+        if (hotelMetaEl) hotelMetaEl.textContent = `Contact: ${hotelProfile.contactPerson || 'Chef'} | ${hotelProfile.phone || ''} | ${hotelProfile.address || ''}`;
+        if (savedHotelLabel) savedHotelLabel.textContent = hotelProfile.hotelName;
+      }
+    }
+
+    function openProfileModal() {
+      document.getElementById('quick-hotel-name').value = hotelProfile.hotelName || '';
+      document.getElementById('quick-contact-person').value = hotelProfile.contactPerson || '';
+      document.getElementById('quick-phone').value = hotelProfile.phone || '';
+      document.getElementById('quick-address').value = hotelProfile.address || '';
+
+      const overlay = document.getElementById('profile-modal-overlay');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProfileModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      const overlay = document.getElementById('profile-modal-overlay');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function saveProfileSettings(e) {
+      e.preventDefault();
+      hotelProfile = {
+        hotelName: document.getElementById('quick-hotel-name').value.trim(),
+        contactPerson: document.getElementById('quick-contact-person').value.trim(),
+        phone: document.getElementById('quick-phone').value.trim(),
+        address: document.getElementById('quick-address').value.trim()
+      };
+
+      localStorage.setItem('sk_hotel_profile', JSON.stringify(hotelProfile));
+      updateHotelProfileBanner();
+      closeProfileModal();
+      showToast('Hotel profile saved successfully!');
+    }
+
+    async function handleOrderSubmission(e) {
+      e.preventDefault();
+
+      const hotelName = document.getElementById('form-hotel-name').value.trim();
+      const hotelType = document.getElementById('form-hotel-type').value;
+      const contactPerson = document.getElementById('form-contact-person').value.trim();
+      const phone = document.getElementById('form-phone').value.trim();
+      const address = document.getElementById('form-address').value.trim();
+      const deliverySlot = document.getElementById('form-delivery-slot').value;
+      const cuttingStyle = document.getElementById('form-cutting-style').value;
+      const notes = document.getElementById('form-notes').value.trim();
+
+      hotelProfile = { hotelName, hotelType, contactPerson, phone, address };
+      localStorage.setItem('sk_hotel_profile', JSON.stringify(hotelProfile));
+      updateHotelProfileBanner();
+
+      const itemsMap = {};
+      let totalKgs = 0;
+      let eggTrays = 0;
+      const orderedItemsList = [];
+      const summaryParts = [];
+
+      POULTRY_ITEMS.forEach(item => {
+        const qty = orderQuantities[item.id] || 0;
+        itemsMap[item.sheetColumnName] = qty > 0 ? `${qty}` : "0";
+        if (qty > 0) {
+          if (item.unit === 'Tray') eggTrays += qty;
+          else totalKgs += qty;
+          orderedItemsList.push({ name: item.name, qty: qty, unit: item.unit });
+          summaryParts.push(`${item.name.split('(')[0].trim()}: ${qty} ${item.unit}`);
+        }
+      });
+
+      if (orderedItemsList.length === 0) {
+        showToast('No items selected!');
+        return;
+      }
+
+      let totalUnitsText = totalKgs > 0 && eggTrays > 0 ? `${totalKgs} Kg + ${eggTrays} Trays` : (totalKgs > 0 ? `${totalKgs} Kg` : `${eggTrays} Trays`);
+
+      const submitBtn = document.getElementById('submit-order-btn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="bi bi-arrow-repeat spin"></i> Logging Order to Google Sheets...`;
+      }
+
+      const now = new Date();
+      const timestamp = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB');
+
+      const sheetPayload = {
+        timestamp: timestamp,
+        hotelName: hotelName,
+        hotelType: hotelType,
+        contactPerson: contactPerson,
+        phone: phone,
+        address: address,
+        deliverySlot: deliverySlot,
+        cuttingStyle: cuttingStyle,
+        items: itemsMap,
+        itemsSummary: summaryParts.join(' | '),
+        totalUnits: totalUnitsText,
+        notes: notes || '-'
+      };
+
+      const payloadString = JSON.stringify(sheetPayload);
+
+      // Send to Google Sheets via Fetch + Hidden Form Target
+      if (STORE_CONFIG.googleSheetScriptUrl && STORE_CONFIG.googleSheetScriptUrl.startsWith('https://script.google.com')) {
+        try {
+          fetch(STORE_CONFIG.googleSheetScriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: payloadString
+          }).catch(err => console.log(err));
+        } catch (e) {}
+
+        try {
+          const hiddenForm = document.createElement('form');
+          hiddenForm.action = STORE_CONFIG.googleSheetScriptUrl;
+          hiddenForm.method = 'POST';
+          hiddenForm.target = 'hidden_sheet_iframe';
+          hiddenForm.style.display = 'none';
+
+          const payloadInput = document.createElement('input');
+          payloadInput.type = 'hidden';
+          payloadInput.name = 'payload';
+          payloadInput.value = payloadString;
+
+          hiddenForm.appendChild(payloadInput);
+          document.body.appendChild(hiddenForm);
+          hiddenForm.submit();
+          setTimeout(() => hiddenForm.remove(), 2000);
+        } catch (e) {}
+      }
+
+      let waMessage = `🍗 *${STORE_CONFIG.storeName.toUpperCase()} - WHOLESALE CHICKEN ORDER* 🌿\n`;
+      waMessage += `----------------------------------------\n`;
+      waMessage += `🏨 *Hotel / Restaurant:* ${hotelName}\n`;
+      waMessage += `📋 *Category:* ${hotelType}\n`;
+      waMessage += `👤 *Chef / Contact:* ${contactPerson}\n`;
+      waMessage += `📞 *Phone:* ${phone}\n`;
+      waMessage += `📍 *Delivery Area:* ${address}\n`;
+      waMessage += `⏰ *Delivery Time:* ${deliverySlot}\n`;
+      waMessage += `🔪 *Cutting Style:* ${cuttingStyle}\n`;
+      waMessage += `\n📦 *ORDERED ITEMS DETAILS:*\n`;
+
+      orderedItemsList.forEach((item, index) => {
+        waMessage += `${index + 1}. *${item.name}*: ${item.qty} ${item.unit}\n`;
+      });
+
+      waMessage += `\n----------------------------------------\n`;
+      waMessage += `⭐ *TOTAL ORDER WEIGHT:* ${totalUnitsText}\n`;
+      if (notes) waMessage += `📝 *Special Notes:* ${notes}\n`;
+      waMessage += `----------------------------------------\n`;
+      waMessage += `Please confirm this early morning supply booking. Thank you!`;
+
+      const waUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
+
+      orderQuantities = {};
+      renderPoultryItems();
+      updateStickySummary();
+      closeOrderModal();
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<i class="bi bi-send-check-fill"></i> <span>Confirm & Send Order (Google Sheets + WhatsApp)</span>`;
+      }
+
+      showToast(`Order recorded for ${totalUnitsText}! Opening WhatsApp...`);
+      window.open(waUrl, '_blank');
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast-msg-card';
+      toast.innerHTML = `<i class="bi bi-check2-circle" style="color:#22c55e; font-size:1.15rem;"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
 </body>
 </html>
