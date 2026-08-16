@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SK Foods - Wholesale Chicken & Poultry Supply Portal (B2B)</title>
+  <meta name="description" content="Direct Wholesale Chicken & Poultry Supply portal for Restaurants, Hotels, Dhabas, Mess and Caterers by SK Foods. Night ordering for early morning 5:00 AM delivery.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍗</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. Top Night Notice Bar -->
+  <aside class="top-notice-bar">
+    <div class="container notice-flex">
+      <div class="notice-tag">
+        <span class="pulse-dot"></span>
+        <span id="night-notice-text">🌙 Night Booking Open till 2:00 AM for Early Morning (5:00 AM - 7:00 AM) Delivery</span>
+      </div>
+      <div>
+        <a href="tel:+919629773923" class="notice-phone-link">
+          <i class="bi bi-telephone-fill"></i> +91 96297 73923
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. Main Header -->
+  <header class="main-header">
+    <div class="container header-flex">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-logo-icon">
+          <i class="bi bi-fire"></i>
+        </div>
+        <div class="brand-text">
+          <h1>SK Foods 🍗</h1>
+          <span>Wholesale Poultry Supply (B2B)</span>
+        </div>
+      </a>
+
+      <div class="header-badge-hotel" onclick="openProfileModal()" title="Click to view/edit Hotel Details">
+        <i class="bi bi-shop"></i>
+        <span id="saved-hotel-label">Hotel Order Portal</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 3. Hero & Stats Banner -->
+    <section class="hero-portal-banner">
+      <div class="hero-banner-content">
+        <div class="hero-badge-pill">
+          <i class="bi bi-patch-check-fill"></i> 100% Farm Fresh Dressed Daily
+        </div>
+        <h2 class="hero-banner-title">
+          Daily Wholesale Chicken Supply For <span>Hotels, Dhabas & Restaurants</span>
+        </h2>
+        <p class="hero-banner-sub">
+          Select your required Kgs below and submit your night order. Dressed fresh and delivered at your hotel doorstep by 5:00 AM!
+        </p>
+
+        <div class="hero-stats-row">
+          <div class="stat-box">
+            <i class="bi bi-clock-history stat-icon"></i>
+            <div class="stat-info">
+              <h5>Night Order</h5>
+              <p>Till 2:00 AM</p>
+            </div>
+          </div>
+          <div class="stat-box">
+            <i class="bi bi-truck stat-icon"></i>
+            <div class="stat-info">
+              <h5>Early Delivery</h5>
+              <p>From 4:30 AM</p>
+            </div>
+          </div>
+          <div class="stat-box">
+            <i class="bi bi-scissors stat-icon"></i>
+            <div class="stat-info">
+              <h5>Custom Cut</h5>
+              <p>Biryani / Curry Cut</p>
+            </div>
+          </div>
+          <div class="stat-box">
+            <i class="bi bi-shield-fill-check stat-icon"></i>
+            <div class="stat-info">
+              <h5>Hygienic Pack</h5>
+              <p>Cleaned & Graded</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Hotel Profile Bar -->
+    <section class="profile-card-bar" id="hotel-profile-banner">
+      <div class="profile-card-left">
+        <div class="profile-avatar">
+          <i class="bi bi-building"></i>
+        </div>
+        <div class="profile-texts">
+          <h4 id="banner-hotel-name">Ordering for your Restaurant / Hotel?</h4>
+          <p id="banner-hotel-meta">Click below to save hotel details once for 1-tap fast reorders.</p>
+        </div>
+      </div>
+      <button class="btn-edit-profile" onclick="openProfileModal()">
+        <i class="bi bi-pencil-square"></i> Set Hotel Details
+      </button>
+    </section>
+
+    <!-- 5. Category Pills & Search Toolbar -->
+    <section class="catalog-toolbar">
+      <div class="category-nav-pills" id="category-pills-container">
+        <button class="cat-btn active" onclick="filterByCategory('all', this)">
+          <i class="bi bi-grid-fill"></i> All Items (10)
+        </button>
+        <button class="cat-btn" onclick="filterByCategory('broiler', this)">
+          🍗 Broiler Chicken
+        </button>
+        <button class="cat-btn" onclick="filterByCategory('special-cuts', this)">
+          ✨ Boneless & Special Cuts
+        </button>
+        <button class="cat-btn" onclick="filterByCategory('country-special', this)">
+          🐔 Naatu Kozhi
+        </button>
+        <button class="cat-btn" onclick="filterByCategory('offal', this)">
+          🫀 Liver & Gizzard
+        </button>
+        <button class="cat-btn" onclick="filterByCategory('eggs', this)">
+          🥚 Farm Eggs
+        </button>
+      </div>
+
+      <div class="search-box-wrap">
+        <i class="bi bi-search search-icon-pos"></i>
+        <input 
+          type="text" 
+          id="item-search-input" 
+          class="search-input-field" 
+          placeholder="Search boneless, broiler, leg..."
+          oninput="handleSearchFilter(this.value)"
+        >
+      </div>
+    </section>
+
+    <!-- 6. Poultry Items Grid -->
+    <section class="poultry-grid" id="poultry-items-grid">
+      <!-- Rendered dynamically from data.js -->
+    </section>
+  </main>
+
+  <!-- 7. Sticky Bottom Mobile Order Bar -->
+  <aside class="mobile-sticky-bar" id="mobile-sticky-bar">
+    <div class="sticky-bar-flex">
+      <div class="sticky-data-col">
+        <div class="sticky-weight-headline">
+          <i class="bi bi-basket-fill"></i>
+          <span id="sticky-total-qty-text">0.0 Kg</span>
+        </div>
+        <div class="sticky-sub-info" id="sticky-items-count-text">
+          0 items selected
+        </div>
+      </div>
+      <button class="btn-submit-order-trigger" id="open-order-modal-btn" onclick="openOrderModal()" disabled>
+        <span>Review & Place Order</span>
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 8. Order Review & Confirmation Modal -->
+  <div class="modal-backdrop" id="order-modal-overlay" onclick="closeOrderModal(event)">
+    <div class="modal-container-box" id="order-modal-box">
+      <button class="modal-btn-close" onclick="closeOrderModal()" aria-label="Close modal">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <h3 class="modal-header-title">
+        <i class="bi bi-clipboard2-check-fill" style="color:var(--brand-red);"></i>
+        Review & Confirm Hotel Order
+      </h3>
+      <p class="modal-header-desc">Verify your selected items, cutting preference, and early morning delivery slot.</p>
+
+      <!-- Selected Items Summary List -->
+      <div class="receipt-summary-box" id="modal-review-items-list">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <!-- Hotel Details & Preferences Form -->
+      <form id="b2b-order-form" onsubmit="handleOrderSubmission(event)">
+        <div class="form-row-2">
+          <div class="form-group-field">
+            <label class="form-field-label" for="form-hotel-name">Hotel / Restaurant Name *</label>
+            <input type="text" id="form-hotel-name" class="form-input-ctrl" placeholder="e.g. Star Biryani & Mess" required>
+          </div>
+          <div class="form-group-field">
+            <label class="form-field-label" for="form-hotel-type">Business Category *</label>
+            <select id="form-hotel-type" class="form-select-ctrl" required>
+              <!-- Populated from data.js -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group-field">
+            <label class="form-field-label" for="form-contact-person">Chef / Manager Name *</label>
+            <input type="text" id="form-contact-person" class="form-input-ctrl" placeholder="e.g. Mr. Senthil / Chef Kumar" required>
+          </div>
+          <div class="form-group-field">
+            <label class="form-field-label" for="form-phone">WhatsApp / Contact Number *</label>
+            <input type="tel" id="form-phone" class="form-input-ctrl" placeholder="e.g. 9876543210" required>
+          </div>
+        </div>
+
+        <div class="form-group-field">
+          <label class="form-field-label" for="form-address">Hotel Delivery Location / Area Address *</label>
+          <textarea id="form-address" class="form-textarea-ctrl" rows="2" placeholder="e.g. No. 12, Main Road, Near Bus Stand, Anna Nagar, Chennai" required></textarea>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group-field">
+            <label class="form-field-label" for="form-delivery-slot">Required Delivery Time Slot *</label>
+            <select id="form-delivery-slot" class="form-select-ctrl" required>
+              <!-- Populated from data.js -->
+            </select>
+          </div>
+          <div class="form-group-field">
+            <label class="form-field-label" for="form-cutting-style">Cutting & Prep Style *</label>
+            <select id="form-cutting-style" class="form-select-ctrl" required>
+              <!-- Populated from data.js -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group-field">
+          <label class="form-field-label" for="form-notes">Special Cutting / Packing Instructions (Optional)</label>
+          <input type="text" id="form-notes" class="form-input-ctrl" placeholder="e.g. Extra clean, pack in 5kg bags separately">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-confirm-final-submit" id="submit-order-btn">
+          <i class="bi bi-send-check-fill"></i>
+          <span>Confirm & Send Order (Google Sheets + WhatsApp)</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 9. Quick Hotel Profile Modal -->
+  <div class="modal-backdrop" id="profile-modal-overlay" onclick="closeProfileModal(event)">
+    <div class="modal-container-box">
+      <button class="modal-btn-close" onclick="closeProfileModal()"><i class="bi bi-x-lg"></i></button>
+      <h3 class="modal-header-title"><i class="bi bi-building"></i> Save Hotel Details</h3>
+      <p class="modal-header-desc">Save your hotel details once to avoid retyping every night.</p>
+      <form id="quick-profile-form" onsubmit="saveProfileSettings(event)">
+        <div class="form-group-field">
+          <label class="form-field-label">Hotel / Restaurant Name *</label>
+          <input type="text" id="quick-hotel-name" class="form-input-ctrl" required placeholder="e.g. Hotel Saravana Bhavan">
+        </div>
+        <div class="form-group-field">
+          <label class="form-field-label">Contact Person Name</label>
+          <input type="text" id="quick-contact-person" class="form-input-ctrl" placeholder="e.g. Manager Ramesh">
+        </div>
+        <div class="form-group-field">
+          <label class="form-field-label">Phone Number *</label>
+          <input type="tel" id="quick-phone" class="form-input-ctrl" required placeholder="e.g. 9876543210">
+        </div>
+        <div class="form-group-field">
+          <label class="form-field-label">Hotel Delivery Address *</label>
+          <textarea id="quick-address" class="form-textarea-ctrl" rows="2" required placeholder="Street, Area, Landmark"></textarea>
+        </div>
+        <button type="submit" class="btn-confirm-final-submit" style="background:var(--brand-gradient); margin-top:1rem;">
+          <i class="bi bi-check2-circle"></i> Save Hotel Profile
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden Iframe for Fail-Proof Google Sheets Sync -->
+  <iframe name="hidden_sheet_iframe" id="hidden_sheet_iframe" style="display:none;"></iframe>
+
+  <!-- Toast Notification Stack -->
+  <div class="toast-stack" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
