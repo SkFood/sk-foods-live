@@ -15,19 +15,22 @@ Dedicated mobile-first B2B wholesale poultry supply web app for **Restaurants, H
    - Daily fluctuating poultry rates are handled via wholesale terms.
    - The web app and bills strictly track **Quantities & Weights in Kg / Trays** with zero price confusion.
 
-3. **📊 100% Automated Google Sheet Logging (10-Item Columns)**:
-   - Every hotel order automatically creates a structured row in your Google Sheet with separate columns for each of the 10 poultry items:
-     - `Broiler Skinless (Kg)`
-     - `Broiler With Skin (Kg)`
+3. **📊 100% Automated Google Sheet Logging (13-Item Columns)**:
+   - Every hotel order automatically creates a structured row in your Google Sheet with separate columns for each of the exact 13 poultry items:
+     - `W/S Briyani Cut (Kg)`
+     - `W/S Curry Cut (Kg)`
+     - `Skinless Curry Cut (Kg)`
+     - `Tandoori Without Neck (Kg/Birds)`
+     - `Grill Chicken (Kg/Birds)`
+     - `Lollipop (Kg)`
      - `Boneless Breast (Kg)`
-     - `Leg & Thigh Pieces (Kg)`
-     - `Chicken Lollipop (Kg/Pcs)`
-     - `Chicken Wings (Kg)`
-     - `Country Chicken / Naatu Kozhi (Kg)`
-     - `Liver & Gizzard (Kg)`
-     - `Chicken Minced / Keema (Kg)`
-     - `Farm Eggs (Trays - 30 Pcs)`
-     - *Plus Hotel Name, Contact, Phone, Delivery Slot, Cutting Style, Total Kgs, and Notes.*
+     - `Leg Boneless (Kg)`
+     - `Drumstick W/S (Kg)`
+     - `Drumstick Skinless (Kg)`
+     - `Janatha (Kg)`
+     - `Liver (Kg)`
+     - `Gizzard (Kg)`
+     - *Plus Hotel Name, Contact, Phone, Delivery Slot, Cutting Style, Total Kgs, Notes, and Merchant Call Confirmation Status (`📞 Pending Merchant Call Confirmation`).*
 
 4. **📲 Instant WhatsApp Bill Dispatch**:
    - Simultaneously prepares a formatted receipt and opens WhatsApp for instant order confirmation.

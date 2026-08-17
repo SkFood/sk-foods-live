@@ -7,10 +7,10 @@ const STORE_CONFIG = {
   phone: "+91 96297 73923",
   whatsappNumber: "919629773923", // Merchant WhatsApp number
   address: "Wholesale Poultry Market, Chennai & Statewide Delivery",
-  nightOrderNotice: "🌙 Night Orders Open: 6:00 PM - 11:00 PM for Early Morning Delivery",
+  nightOrderNotice: "🌙 Booking Open: 3:00 PM - 8:00 PM for Early Morning Delivery",
   
   // Connected Google Apps Script Web App URL for Automated Google Sheets sync
-  googleSheetScriptUrl: "https://script.google.com/macros/s/AKfycbw1ER0bod32XB3wIqH1eZNlxJVDpNyOMTGoYGzlEomRVisEMcEdCrOkWIv6NlVXt33y/exec"
+  googleSheetScriptUrl: "https://script.google.com/macros/s/AKfycbwC4-dC2HAAjou6fGHhoa9SxRsvz1tGoYLtdcoAYvX1xkl-ZsAmjFEEFL8tytPgL9_Q/exec"
 };
 
 // Hotel / Business Categories (Exact User Order)
@@ -45,172 +45,149 @@ const CUTTING_STYLES = [
   "Custom / See Special Notes"
 ];
 
-// 15 B2B Poultry Products (10 Core + 5 Dummy / Sample Items)
+// SK Foods - B2B Wholesale Poultry Products (Exact 13 Items)
 const POULTRY_ITEMS = [
   {
-    id: "item_broiler_skinless",
-    sheetColumnName: "Broiler Skinless (Kg)",
-    name: "Broiler Chicken - Skinless",
-    category: "broiler",
+    id: "item_ws_briyani_cut",
+    sheetColumnName: "W/S Briyani Cut (Kg)",
+    name: "W/S Briyani Cut",
+    category: "curry-cuts",
+    unit: "Kg",
+    minOrder: 5,
+    quickAddKgs: [5, 10, 25, 50],
+    image: "images/ws_briyani_cut.jpg",
+    description: "Skin-on large juicy cuts specially portioned for Dum & Hotel Biryani."
+  },
+  {
+    id: "item_ws_curry_cut",
+    sheetColumnName: "W/S Curry Cut (Kg)",
+    name: "W/S Curry Cut",
+    category: "curry-cuts",
+    unit: "Kg",
+    minOrder: 5,
+    quickAddKgs: [5, 10, 25, 50],
+    image: "images/ws_curry_cut.jpg",
+    description: "Standard medium skin-on curry pieces for gravies, curries & dhabas."
+  },
+  {
+    id: "item_skinless_curry_cut",
+    sheetColumnName: "Skinless Curry Cut (Kg)",
+    name: "Skinless Curry Cut",
+    category: "curry-cuts",
     unit: "Kg",
     minOrder: 5,
     quickAddKgs: [5, 10, 25, 50],
     image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
-    description: "Fresh skin-out broiler chicken, hygienically dressed and cleaned for restaurants & gravies."
+    description: "Fresh skin-out broiler chicken pieces, hygienically dressed and cleaned for restaurant gravies."
   },
   {
-    id: "item_broiler_withskin",
-    sheetColumnName: "Broiler With Skin (Kg)",
-    name: "Broiler Chicken - With Skin",
-    category: "broiler",
+    id: "item_tandoori_without_neck",
+    sheetColumnName: "Tandoori Without Neck (Kg/Birds)",
+    name: "Tandoori (Without Neck)",
+    category: "curry-cuts",
     unit: "Kg",
-    minOrder: 5,
-    quickAddKgs: [5, 10, 25, 50],
-    image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
-    description: "Skin-on whole dressed broiler chicken. Ideal for roast, grill, tandoor and dhabas."
+    minOrder: 2,
+    quickAddKgs: [2, 5, 10, 20],
+    image: "images/tandoori_without_neck.jpg",
+    description: "Whole skinless dressed chicken (900g-1.2kg) without neck, pre-cut and scored for Tandoori."
+  },
+  {
+    id: "item_grill_chicken",
+    sheetColumnName: "Grill Chicken (Kg/Birds)",
+    name: "Grill Chicken",
+    category: "curry-cuts",
+    unit: "Kg",
+    minOrder: 2,
+    quickAddKgs: [2, 5, 10, 20],
+    image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=500&q=80",
+    description: "Whole skin-on dressed chicken (900g-1.2kg) calibrated for rotisserie, shawarma & charcoal grill."
+  },
+  {
+    id: "item_lollipop",
+    sheetColumnName: "Lollipop (Kg)",
+    name: "Lollipop",
+    category: "boneless-special",
+    unit: "Kg",
+    minOrder: 2,
+    quickAddKgs: [2, 5, 10, 15],
+    image: "images/chicken_lollipop.jpg",
+    description: "Frenched winglet cuts expertly shaped for restaurant Chicken Lollipop starters."
   },
   {
     id: "item_boneless_breast",
     sheetColumnName: "Boneless Breast (Kg)",
-    name: "Boneless Breast Fillet",
-    category: "special-cuts",
+    name: "Boneless Breast",
+    category: "boneless-special",
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
-    description: "100% tender boneless breast meat. Perfect for Chilli Chicken, Chicken 65 & Shawarma."
+    image: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=500&q=80",
+    description: "100% pure tender boneless breast meat. Perfect for Chilli Chicken, Chicken 65 & Shawarma."
   },
   {
-    id: "item_leg_thigh_cuts",
-    sheetColumnName: "Leg & Thigh Pieces (Kg)",
-    name: "Leg & Thigh Pieces",
-    category: "special-cuts",
+    id: "item_leg_boneless",
+    sheetColumnName: "Leg Boneless (Kg)",
+    name: "Leg Boneless",
+    category: "boneless-special",
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
-    description: "Juicy leg quarters and drumsticks. Preferred for Biryani, Leg Roast, and Tandoori."
+    image: "images/leg_boneless.jpg",
+    description: "Juicy dark meat boneless leg thigh fillets for tikkas, kebabs and restaurant gravies."
   },
   {
-    id: "item_chicken_lollipop",
-    sheetColumnName: "Chicken Lollipop (Kg/Pcs)",
-    name: "Chicken Lollipop Cuts",
-    category: "special-cuts",
-    unit: "Kg",
-    minOrder: 2,
-    quickAddKgs: [2, 5, 10, 15],
-    image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
-    description: "Frenched winglets expertly trimmed for restaurant Chicken Lollipop appetizers."
-  },
-  {
-    id: "item_chicken_wings",
-    sheetColumnName: "Chicken Wings (Kg)",
-    name: "Chicken Wings",
-    category: "special-cuts",
+    id: "item_drumstick_ws",
+    sheetColumnName: "Drumstick W/S (Kg)",
+    name: "Drumstick (W/S)",
+    category: "boneless-special",
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
-    description: "Full tender wings. Best suited for Fried Chicken, Chinese gravies & snacks."
+    image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=500&q=80",
+    description: "Skin-on meaty chicken drumsticks. Prime selection for crispy fry, barbecue & roasts."
   },
   {
-    id: "item_country_chicken",
-    sheetColumnName: "Country Chicken / Naatu Kozhi (Kg)",
-    name: "Country Chicken / Naatu Kozhi",
-    category: "country-special",
+    id: "item_drumstick_skinless",
+    sheetColumnName: "Drumstick Skinless (Kg)",
+    name: "Drumstick (Skinless)",
+    category: "boneless-special",
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1548567117-0429f55e54d8?auto=format&fit=crop&w=500&q=80",
-    description: "Genuine free-range farm country chicken. Dressed fresh for authentic soup and kulambu."
+    image: "https://images.unsplash.com/photo-1606728035253-49e8a23146de?auto=format&fit=crop&w=500&q=80",
+    description: "Skinless cleaned uniform drumstick leg pieces for gravies, Tandoori & biryani."
   },
   {
-    id: "item_liver_gizzard",
-    sheetColumnName: "Liver & Gizzard (Kg)",
-    name: "Chicken Liver & Gizzard",
+    id: "item_janatha",
+    sheetColumnName: "Janatha (Kg)",
+    name: "Janatha",
+    category: "curry-cuts",
+    unit: "Kg",
+    minOrder: 5,
+    quickAddKgs: [5, 10, 25, 50],
+    image: "images/janatha_chicken.jpg",
+    description: "Economical wholesale dressed chicken batch for high-volume mess, fast food & catering."
+  },
+  {
+    id: "item_liver",
+    sheetColumnName: "Liver (Kg)",
+    name: "Liver",
     category: "offal",
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 15],
-    image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
-    description: "Freshly cleaned chicken liver and gizzard. High demand for fry, gravy, and side dishes."
+    image: "images/chicken_liver.jpg",
+    description: "Freshly cleaned chicken liver, separated fresh daily for fry, masala & side dishes."
   },
   {
-    id: "item_chicken_keema",
-    sheetColumnName: "Chicken Minced / Keema (Kg)",
-    name: "Chicken Minced / Keema",
-    category: "special-cuts",
+    id: "item_gizzard",
+    sheetColumnName: "Gizzard (Kg)",
+    name: "Gizzard",
+    category: "offal",
     unit: "Kg",
     minOrder: 2,
-    quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80",
-    description: "Fine minced chicken meat for Keema dosa, rolls, samosa fillings & meatballs."
-  },
-  {
-    id: "item_farm_eggs_tray",
-    sheetColumnName: "Farm Eggs (Trays - 30 Pcs)",
-    name: "Farm Fresh Eggs (Tray - 30 Pcs)",
-    category: "eggs",
-    unit: "Tray",
-    minOrder: 1,
-    quickAddKgs: [1, 2, 5, 10],
-    image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=500&q=80",
-    description: "Standard 30-eggs poultry tray. Fresh daily supply for egg fried rice, parotta & biryani."
-  },
-  // --- 5 DUMMY / SAMPLE ITEMS ---
-  {
-    id: "item_kadaknath_black",
-    sheetColumnName: "Kadaknath Black Chicken (Kg)",
-    name: "Kadaknath Black Meat Chicken",
-    category: "country-special",
-    unit: "Kg",
-    minOrder: 2,
-    quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1548567117-0429f55e54d8?auto=format&fit=crop&w=500&q=80",
-    description: "Original pure black Kadaknath bird. High protein medicinal meat for specialized restaurant menus."
-  },
-  {
-    id: "item_quail_kaadai",
-    sheetColumnName: "Farm Quail / Kaadai (Pcs/Kg)",
-    name: "Farm Quail / Kaadai Birds",
-    category: "special-cuts",
-    unit: "Kg",
-    minOrder: 2,
-    quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
-    description: "Dressed ready-to-cook whole farm quails (Kaadai) for signature roasts and pepper fry."
-  },
-  {
-    id: "item_drumstick_only",
-    sheetColumnName: "Chicken Drumsticks Only (Kg)",
-    name: "Chicken Drumsticks (Legs Only)",
-    category: "special-cuts",
-    unit: "Kg",
-    minOrder: 2,
-    quickAddKgs: [2, 5, 10, 25],
-    image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
-    description: "Uniformly graded meaty chicken drumsticks. Prime selection for Tandoori, Fried & BBQ."
-  },
-  {
-    id: "item_duck_vaathu",
-    sheetColumnName: "Farm Duck Meat / Vaathu (Kg)",
-    name: "Farm Duck Meat / Vaathu",
-    category: "country-special",
-    unit: "Kg",
-    minOrder: 2,
-    quickAddKgs: [2, 5, 10, 20],
-    image: "https://images.unsplash.com/photo-1548567117-0429f55e54d8?auto=format&fit=crop&w=500&q=80",
-    description: "Tender farm duck meat dressed clean for Chettinad duck roast and traditional curry."
-  },
-  {
-    id: "item_country_eggs_tray",
-    sheetColumnName: "Country Chicken Eggs (Tray)",
-    name: "Country Chicken Eggs (Tray - 30 Pcs)",
-    category: "eggs",
-    unit: "Tray",
-    minOrder: 1,
-    quickAddKgs: [1, 2, 5, 10],
-    image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=500&q=80",
-    description: "100% genuine brown Naatu Kozhi eggs tray for premium breakfast and catering."
+    quickAddKgs: [2, 5, 10, 15],
+    image: "images/chicken_gizzard.jpg",
+    description: "Freshly dressed chicken gizzards, thoroughly washed and cleaned for pepper fry."
   }
 ];

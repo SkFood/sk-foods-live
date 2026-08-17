@@ -414,19 +414,29 @@ async function handleOrderSubmission(e) {
 
   const payloadString = JSON.stringify(sheetPayload);
 
-  // Send to Google Sheets via Fetch + Hidden Form Target
+  // Send to Google Sheets via Triple Fallback (Fetch POST + Fetch GET + Hidden Form)
   if (STORE_CONFIG.googleSheetScriptUrl && STORE_CONFIG.googleSheetScriptUrl.startsWith('https://script.google.com')) {
-    // Method A: Direct Fetch
+    const encodedPayload = encodeURIComponent(payloadString);
+
+    // 1. Fetch POST
     try {
       fetch(STORE_CONFIG.googleSheetScriptUrl, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: payloadString
-      }).catch(err => console.log(err));
+      }).catch(err => {});
     } catch (e) {}
 
-    // Method B: Hidden Form Submission via iframe (bypasses browser CORS completely)
+    // 2. Fetch GET fallback
+    try {
+      fetch(STORE_CONFIG.googleSheetScriptUrl + '?payload=' + encodedPayload, {
+        method: 'GET',
+        mode: 'no-cors'
+      }).catch(err => {});
+    } catch (e) {}
+
+    // 3. Hidden Form Submit fallback
     try {
       const hiddenForm = document.createElement('form');
       hiddenForm.action = STORE_CONFIG.googleSheetScriptUrl;
