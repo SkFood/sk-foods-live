@@ -55,7 +55,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 5,
     quickAddKgs: [5, 10, 25, 50],
-    image: "images/ws_briyani_cut.jpg",
+    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=500&q=80",
     description: "Skin-on large juicy cuts specially portioned for Dum & Hotel Biryani."
   },
   {
@@ -66,7 +66,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 5,
     quickAddKgs: [5, 10, 25, 50],
-    image: "images/ws_curry_cut.jpg",
+    image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
     description: "Standard medium skin-on curry pieces for gravies, curries & dhabas."
   },
   {
@@ -88,7 +88,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 20],
-    image: "images/tandoori_without_neck.jpg",
+    image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=500&q=80",
     description: "Whole skinless dressed chicken (900g-1.2kg) without neck, pre-cut and scored for Tandoori."
   },
   {
@@ -110,7 +110,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 15],
-    image: "images/chicken_lollipop.jpg",
+    image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
     description: "Frenched winglet cuts expertly shaped for restaurant Chicken Lollipop starters."
   },
   {
@@ -132,7 +132,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 20],
-    image: "images/leg_boneless.jpg",
+    image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=500&q=80",
     description: "Juicy dark meat boneless leg thigh fillets for tikkas, kebabs and restaurant gravies."
   },
   {
@@ -165,7 +165,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 5,
     quickAddKgs: [5, 10, 25, 50],
-    image: "images/janatha_chicken.jpg",
+    image: "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=500&q=80",
     description: "Economical wholesale dressed chicken batch for high-volume mess, fast food & catering."
   },
   {
@@ -176,7 +176,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 15],
-    image: "images/chicken_liver.jpg",
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80",
     description: "Freshly cleaned chicken liver, separated fresh daily for fry, masala & side dishes."
   },
   {
@@ -187,7 +187,7 @@ const POULTRY_ITEMS = [
     unit: "Kg",
     minOrder: 2,
     quickAddKgs: [2, 5, 10, 15],
-    image: "images/chicken_gizzard.jpg",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=500&q=80",
     description: "Freshly dressed chicken gizzards, thoroughly washed and cleaned for pepper fry."
   }
 ];
