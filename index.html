@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>SK Foods - Wholesale Chicken & Poultry Supply Portal (B2B)</title>
-  <meta name="description" content="Direct Wholesale Chicken & Poultry Supply portal for Restaurants, Hotels, Dhabas, Mess and Caterers by SK Foods. Night ordering for early morning 5:00 AM delivery.">
+  <meta name="description" content="Direct Wholesale Chicken & Poultry Supply portal for Restaurants, Hotels, Dhabas, Mess and Caterers by SK Foods. Night ordering for early morning delivery.">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍗</text></svg>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -105,6 +105,12 @@
     }
     .brand-text h1 { font-size: 1.45rem; color: white; margin: 0; line-height: 1.1; }
     .brand-text span { font-size: 0.72rem; font-weight: 700; color: #fb7185; letter-spacing: 1px; text-transform: uppercase; }
+    .lang-toggle-btn {
+      background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.45rem 0.85rem; border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 800;
+      color: #fbbf24; display: flex; align-items: center; gap: 0.45rem; cursor: pointer; transition: var(--transition);
+    }
+    .lang-toggle-btn:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
     .header-badge-hotel {
       background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 0.45rem 0.9rem; border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 700;
@@ -311,8 +317,22 @@
     .grand-total-label { font-size: 0.95rem; font-weight: 900; color: var(--brand-red-deep); }
     .grand-total-val { font-size: 1.3rem; font-weight: 900; color: var(--brand-red-deep); font-family: var(--font-heading); }
 
-    /* Form */
-    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    /* Business Type Visual Chips */
+    .biz-type-chips-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 0.5rem; margin-top: 0.25rem;
+    }
+    .biz-chip {
+      background: #f8fafc; border: 1.5px solid var(--border-light); border-radius: var(--radius-sm);
+      padding: 0.55rem 0.6rem; font-size: 0.8rem; font-weight: 700; color: var(--text-main);
+      display: flex; align-items: center; gap: 0.45rem; cursor: pointer; transition: var(--transition);
+      text-align: left; line-height: 1.2;
+    }
+    .biz-chip-icon { font-size: 1.15rem; flex-shrink: 0; }
+    .biz-chip:hover { border-color: var(--brand-red); background: #fff1f2; }
+    .biz-chip.active {
+      background: var(--brand-gradient); color: white; border-color: transparent;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3); transform: scale(1.02);
+    }
     .form-group-field { margin-bottom: 1rem; }
     .form-field-label { display: block; font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem; }
     .form-input-ctrl, .form-select-ctrl, .form-textarea-ctrl {
@@ -352,12 +372,12 @@
 </head>
 <body>
 
-  <!-- 1. Top Night Cutoff Notice Bar -->
+  <!-- 1. Top Night Notice Bar -->
   <aside class="top-notice-bar">
     <div class="container notice-flex">
       <div class="notice-tag">
         <span class="pulse-dot"></span>
-        <span id="night-notice-text">🌙 Night Booking Open till 2:00 AM for Early Morning (5:00 AM - 7:00 AM) Delivery</span>
+        <span id="night-notice-text">🌙 Night Booking Open: 6:00 PM - 11:00 PM for Early Morning Delivery</span>
       </div>
       <div>
         <a href="tel:+919629773923" class="notice-phone-link">
@@ -367,7 +387,7 @@
     </div>
   </aside>
 
-  <!-- 2. Luxury Header -->
+  <!-- 2. Header -->
   <header class="main-header">
     <div class="container header-flex">
       <a href="#" class="brand-wrapper">
@@ -380,9 +400,16 @@
         </div>
       </a>
 
-      <div class="header-badge-hotel" onclick="openProfileModal()" title="Click to view/edit Hotel Details">
-        <i class="bi bi-shop"></i>
-        <span id="saved-hotel-label">Hotel Order Portal</span>
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <button class="lang-toggle-btn" id="btn-lang-toggle" onclick="toggleLanguage()" title="Switch Language">
+          <i class="bi bi-translate"></i>
+          <span id="lang-btn-label">🌐 தமிழ்</span>
+        </button>
+
+        <div class="header-badge-hotel" onclick="openProfileModal()" title="Click to view/edit Hotel Details">
+          <i class="bi bi-shop"></i>
+          <span id="saved-hotel-label">Hotel Order Portal</span>
+        </div>
       </div>
     </div>
   </header>
@@ -398,7 +425,7 @@
           Daily Wholesale Chicken Supply For <span>Hotels, Dhabas & Restaurants</span>
         </h2>
         <p class="hero-banner-sub">
-          Select your required Kgs below and submit your night order. Dressed fresh and delivered at your hotel doorstep by 5:00 AM!
+          Select your required Kgs below and submit your night order (6:00 PM - 11:00 PM). Dressed fresh and delivered at your hotel doorstep in the Early Morning!
         </p>
 
         <div class="hero-stats-row">
@@ -406,14 +433,14 @@
             <i class="bi bi-clock-history stat-icon"></i>
             <div class="stat-info">
               <h5>Night Order</h5>
-              <p>Till 2:00 AM</p>
+              <p>6:00 PM - 11:00 PM</p>
             </div>
           </div>
           <div class="stat-box">
             <i class="bi bi-truck stat-icon"></i>
             <div class="stat-info">
               <h5>Early Delivery</h5>
-              <p>From 4:30 AM</p>
+              <p>Direct to Kitchen</p>
             </div>
           </div>
           <div class="stat-box">
@@ -454,7 +481,7 @@
     <section class="catalog-toolbar">
       <div class="category-nav-pills" id="category-pills-container">
         <button class="cat-btn active" onclick="filterByCategory('all', this)">
-          <i class="bi bi-grid-fill"></i> All Items (10)
+          <i class="bi bi-grid-fill"></i> All Items (15)
         </button>
         <button class="cat-btn" onclick="filterByCategory('broiler', this)">
           🍗 Broiler Chicken
@@ -463,13 +490,13 @@
           ✨ Boneless & Special Cuts
         </button>
         <button class="cat-btn" onclick="filterByCategory('country-special', this)">
-          🐔 Naatu Kozhi
+          🐔 Country Chicken
         </button>
         <button class="cat-btn" onclick="filterByCategory('offal', this)">
           🫀 Liver & Gizzard
         </button>
         <button class="cat-btn" onclick="filterByCategory('eggs', this)">
-          🥚 Farm Eggs
+          🥚 Farm Fresh Eggs
         </button>
       </div>
 
@@ -521,7 +548,7 @@
         <i class="bi bi-clipboard2-check-fill" style="color:var(--brand-red);"></i>
         Review & Confirm Hotel Order
       </h3>
-      <p class="modal-header-desc">Verify your selected items, cutting preference, and early morning delivery slot.</p>
+      <p class="modal-header-desc">Verify your selected items, cutting preference, and delivery time slot.</p>
 
       <!-- Receipt summary box -->
       <div class="receipt-summary-box" id="modal-review-items-list"></div>
@@ -531,22 +558,66 @@
         <div class="form-row-2">
           <div class="form-group-field">
             <label class="form-field-label" for="form-hotel-name">Hotel / Restaurant Name *</label>
-            <input type="text" id="form-hotel-name" class="form-input-ctrl" placeholder="e.g. Star Biryani & Mess" required>
+            <input type="text" id="form-hotel-name" class="form-input-ctrl" placeholder="e.g. Star Biryani & Restaurant" required>
           </div>
-          <div class="form-group-field">
-            <label class="form-field-label" for="form-hotel-type">Business Category *</label>
-            <select id="form-hotel-type" class="form-select-ctrl" required></select>
+          <div class="form-group-field" style="grid-column: 1 / -1;">
+            <label class="form-field-label">Business Category *</label>
+            <input type="hidden" id="form-hotel-type" value="Restaurant" required>
+            <div class="biz-type-chips-grid" id="biz-type-chips-container">
+              <button type="button" class="biz-chip active" data-val="Restaurant" onclick="selectBizCategory(this, 'Restaurant')">
+                <span class="biz-chip-icon">🍽️</span>
+                <span>Restaurant</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="Dhaba" onclick="selectBizCategory(this, 'Dhaba')">
+                <span class="biz-chip-icon">🥘</span>
+                <span>Dhaba</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="Hotels" onclick="selectBizCategory(this, 'Hotels')">
+                <span class="biz-chip-icon">🏨</span>
+                <span>Hotels</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="Mess" onclick="selectBizCategory(this, 'Mess')">
+                <span class="biz-chip-icon">🍛</span>
+                <span>Mess</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="Fast Food" onclick="selectBizCategory(this, 'Fast Food')">
+                <span class="biz-chip-icon">🍔</span>
+                <span>Fast Food</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="mini Shop" onclick="selectBizCategory(this, 'mini Shop')">
+                <span class="biz-chip-icon">🏪</span>
+                <span>mini Shop</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="Catering & Events" onclick="selectBizCategory(this, 'Catering & Events')">
+                <span class="biz-chip-icon">🎪</span>
+                <span>Catering & Events</span>
+              </button>
+              <button type="button" class="biz-chip" data-val="Others" onclick="selectBizCategory(this, 'Others')">
+                <span class="biz-chip-icon">📦</span>
+                <span>Others</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="form-row-2">
           <div class="form-group-field">
             <label class="form-field-label" for="form-contact-person">Chef / Manager Name *</label>
-            <input type="text" id="form-contact-person" class="form-input-ctrl" placeholder="e.g. Mr. Senthil / Chef Kumar" required>
+            <input type="text" id="form-contact-person" class="form-input-ctrl" placeholder="e.g. Chef Kumar / Manager" required>
           </div>
           <div class="form-group-field">
-            <label class="form-field-label" for="form-phone">WhatsApp / Contact Number *</label>
-            <input type="tel" id="form-phone" class="form-input-ctrl" placeholder="e.g. 9876543210" required>
+            <label class="form-field-label" for="form-phone">WhatsApp / Contact Number (10 Digits) *</label>
+            <input 
+              type="tel" 
+              id="form-phone" 
+              class="form-input-ctrl" 
+              placeholder="e.g. 9876543210" 
+              maxlength="10"
+              inputmode="numeric"
+              pattern="[6-9][0-9]{9}"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+              required
+            >
           </div>
         </div>
 
@@ -561,8 +632,8 @@
             <select id="form-delivery-slot" class="form-select-ctrl" required></select>
           </div>
           <div class="form-group-field">
-            <label class="form-field-label" for="form-cutting-style">Cutting & Prep Style *</label>
-            <select id="form-cutting-style" class="form-select-ctrl" required></select>
+            <label class="form-field-label" for="form-cutting-style">Cutting & Prep Style (Optional)</label>
+            <select id="form-cutting-style" class="form-select-ctrl"></select>
           </div>
         </div>
 
@@ -573,7 +644,7 @@
 
         <button type="submit" class="btn-confirm-final-submit" id="submit-order-btn">
           <i class="bi bi-send-check-fill"></i>
-          <span>Confirm & Send Order (Google Sheets + WhatsApp)</span>
+          <span>Place the Order Confirm</span>
         </button>
       </form>
     </div>
@@ -588,15 +659,25 @@
       <form id="quick-profile-form" onsubmit="saveProfileSettings(event)">
         <div class="form-group-field">
           <label class="form-field-label">Hotel / Restaurant Name *</label>
-          <input type="text" id="quick-hotel-name" class="form-input-ctrl" required placeholder="e.g. Hotel Saravana Bhavan">
+          <input type="text" id="quick-hotel-name" class="form-input-ctrl" required placeholder="e.g. Star Biryani Hotel">
         </div>
         <div class="form-group-field">
           <label class="form-field-label">Contact Person Name</label>
           <input type="text" id="quick-contact-person" class="form-input-ctrl" placeholder="e.g. Manager Ramesh">
         </div>
         <div class="form-group-field">
-          <label class="form-field-label">Phone Number *</label>
-          <input type="tel" id="quick-phone" class="form-input-ctrl" required placeholder="e.g. 9876543210">
+          <label class="form-field-label">Phone Number (10 Digits) *</label>
+          <input 
+            type="tel" 
+            id="quick-phone" 
+            class="form-input-ctrl" 
+            placeholder="e.g. 9876543210" 
+            maxlength="10"
+            inputmode="numeric"
+            pattern="[6-9][0-9]{9}"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+            required
+          >
         </div>
         <div class="form-group-field">
           <label class="form-field-label">Hotel Delivery Address *</label>
@@ -615,7 +696,7 @@
   <!-- Toast Stack -->
   <div class="toast-stack" id="toast-container"></div>
 
-  <!-- EMBEDDED COMPLETE DATA & LOGIC (Guaranteed Zero-Cache Execution) -->
+  <!-- EMBEDDED COMPLETE DATA & LOGIC (100% English) -->
   <script>
     const STORE_CONFIG = {
       storeName: "SK Foods",
@@ -626,39 +707,39 @@
     };
 
     const HOTEL_TYPES = [
-      "Non-Veg Restaurant (அசைவ உணவகம்)",
-      "Biryani Speciality Hotel (பிரியாணி ஹோட்டல்)",
-      "Dhaba / Highway Restaurant (தாபா)",
-      "Mess / Military Hotel (மெஸ் / மிலிட்டரி ஹோட்டல்)",
-      "Fast Food / Chinese Joint (பாஸ்ட் புட்)",
-      "Catering / Event Functions (கேட்டரிங்)",
-      "Tea & Snack Bar / Mini Hotel (மினி ஹோட்டல்)",
-      "Other Wholesale Customer"
+      "Restaurant",
+      "Dhaba",
+      "Hotels",
+      "Mess",
+      "Fast Food",
+      "mini Shop",
+      "Catering & Events",
+      "Others"
     ];
 
     const DELIVERY_SLOTS = [
-      "Early Morning 4:30 AM - 5:30 AM (முாலை 4:30 - 5:30)",
-      "Early Morning 5:30 AM - 6:30 AM (முாலை 5:30 - 6:30)",
-      "Morning 6:30 AM - 7:30 AM (காலை 6:30 - 7:30)",
-      "Morning 7:30 AM - 8:30 AM (காலை 7:30 - 8:30)",
-      "Midday / Lunch Batch 11:30 AM (மதிய சப்ளை 11:30)"
+      "Early Morning 4:30 AM - 5:30 AM",
+      "Early Morning 5:30 AM - 6:30 AM",
+      "Morning 6:30 AM - 7:30 AM",
+      "Morning 7:30 AM - 8:30 AM",
+      "Midday / Lunch Batch 11:30 AM"
     ];
 
     const CUTTING_STYLES = [
-      "Standard Curry Cut (சாதாரண குழம்பு கட்)",
-      "Small Curry Cut (சிறிய கட் - கிரேவி & வறுவல்)",
-      "Biryani 4-Pieces Cut (பிரியாணி 4 பீஸ் கட்)",
-      "Biryani 8-Pieces Cut (பிரியாணி 8 பீஸ் கட்)",
-      "Chilli / 65 Small Cut (சில்லி / 65 கட்)",
-      "Whole Cleaned Bird (முழு கோழி கட் இன்றி)",
-      "Custom / See Special Notes (குறிப்பில் குறிப்பிடப்பட்டுள்ளது)"
+      "Standard Curry Cut",
+      "Small Curry Cut (For Gravy / Fry)",
+      "Biryani 4-Pieces Cut",
+      "Biryani 8-Pieces Cut",
+      "Chilli / 65 Small Cut",
+      "Whole Cleaned Bird (No Cut)",
+      "Custom / See Special Notes"
     ];
 
     const POULTRY_ITEMS = [
       {
         id: "item_broiler_skinless",
         sheetColumnName: "Broiler Skinless (Kg)",
-        name: "Broiler Chicken - Skinless (ஸ்கின்லெஸ் பிராய்லர்)",
+        name: "Broiler Chicken - Skinless",
         category: "broiler",
         unit: "Kg",
         quickAddKgs: [5, 10, 25, 50],
@@ -668,7 +749,7 @@
       {
         id: "item_broiler_withskin",
         sheetColumnName: "Broiler With Skin (Kg)",
-        name: "Broiler Chicken - With Skin (தோலுடன் பிராய்லர்)",
+        name: "Broiler Chicken - With Skin",
         category: "broiler",
         unit: "Kg",
         quickAddKgs: [5, 10, 25, 50],
@@ -678,7 +759,7 @@
       {
         id: "item_boneless_breast",
         sheetColumnName: "Boneless Breast (Kg)",
-        name: "Boneless Breast Fillet (போன்லெஸ் பிரஸ்ட் கட்)",
+        name: "Boneless Breast Fillet",
         category: "special-cuts",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 20],
@@ -688,7 +769,7 @@
       {
         id: "item_leg_thigh_cuts",
         sheetColumnName: "Leg & Thigh Pieces (Kg)",
-        name: "Leg & Thigh Pieces (லெக் & தொடை பீஸ்)",
+        name: "Leg & Thigh Pieces",
         category: "special-cuts",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 20],
@@ -698,7 +779,7 @@
       {
         id: "item_chicken_lollipop",
         sheetColumnName: "Chicken Lollipop (Kg/Pcs)",
-        name: "Chicken Lollipop Cuts (சிக்கன் லாலிபாப்)",
+        name: "Chicken Lollipop Cuts",
         category: "special-cuts",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 15],
@@ -708,7 +789,7 @@
       {
         id: "item_chicken_wings",
         sheetColumnName: "Chicken Wings (Kg)",
-        name: "Chicken Wings (சிக்கன் விங்ஸ்)",
+        name: "Chicken Wings",
         category: "special-cuts",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 20],
@@ -718,7 +799,7 @@
       {
         id: "item_country_chicken",
         sheetColumnName: "Country Chicken / Naatu Kozhi (Kg)",
-        name: "Country Chicken / Naatu Kozhi (நாட்டுக்கோழி)",
+        name: "Country Chicken / Naatu Kozhi",
         category: "country-special",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 20],
@@ -728,7 +809,7 @@
       {
         id: "item_liver_gizzard",
         sheetColumnName: "Liver & Gizzard (Kg)",
-        name: "Chicken Liver & Gizzard (ஈரல் & ஜிizzard)",
+        name: "Chicken Liver & Gizzard",
         category: "offal",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 15],
@@ -738,7 +819,7 @@
       {
         id: "item_chicken_keema",
         sheetColumnName: "Chicken Minced / Keema (Kg)",
-        name: "Chicken Minced / Keema (சிக்கன் கீமா)",
+        name: "Chicken Minced / Keema",
         category: "special-cuts",
         unit: "Kg",
         quickAddKgs: [2, 5, 10, 20],
@@ -748,29 +829,190 @@
       {
         id: "item_farm_eggs_tray",
         sheetColumnName: "Farm Eggs (Trays - 30 Pcs)",
-        name: "Farm Fresh Eggs Tray (முட்டை டிரே - 30 pcs)",
+        name: "Farm Fresh Eggs (Tray - 30 Pcs)",
         category: "eggs",
         unit: "Tray",
         quickAddKgs: [1, 2, 5, 10],
         image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=500&q=80",
         description: "Standard 30-eggs poultry tray. Fresh daily supply for egg fried rice, parotta & biryani."
+      },
+      {
+        id: "item_kadaknath_black",
+        sheetColumnName: "Kadaknath Black Chicken (Kg)",
+        name: "Kadaknath Black Meat Chicken",
+        category: "country-special",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1548567117-0429f55e54d8?auto=format&fit=crop&w=500&q=80",
+        description: "Original pure black Kadaknath bird. High protein medicinal meat for specialized restaurant menus."
+      },
+      {
+        id: "item_quail_kaadai",
+        sheetColumnName: "Farm Quail / Kaadai (Pcs/Kg)",
+        name: "Farm Quail / Kaadai Birds",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1527477245898-df6519f97750?auto=format&fit=crop&w=500&q=80",
+        description: "Dressed ready-to-cook whole farm quails (Kaadai) for signature roasts and pepper fry."
+      },
+      {
+        id: "item_drumstick_only",
+        sheetColumnName: "Chicken Drumsticks Only (Kg)",
+        name: "Chicken Drumsticks (Legs Only)",
+        category: "special-cuts",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 25],
+        image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=500&q=80",
+        description: "Uniformly graded meaty chicken drumsticks. Prime selection for Tandoori, Fried & BBQ."
+      },
+      {
+        id: "item_duck_vaathu",
+        sheetColumnName: "Farm Duck Meat / Vaathu (Kg)",
+        name: "Farm Duck Meat / Vaathu",
+        category: "country-special",
+        unit: "Kg",
+        quickAddKgs: [2, 5, 10, 20],
+        image: "https://images.unsplash.com/photo-1548567117-0429f55e54d8?auto=format&fit=crop&w=500&q=80",
+        description: "Tender farm duck meat dressed clean for Chettinad duck roast and traditional curry."
+      },
+      {
+        id: "item_country_eggs_tray",
+        sheetColumnName: "Country Chicken Eggs (Tray)",
+        name: "Country Chicken Eggs (Tray - 30 Pcs)",
+        category: "eggs",
+        unit: "Tray",
+        quickAddKgs: [1, 2, 5, 10],
+        image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=500&q=80",
+        description: "100% genuine brown Naatu Kozhi eggs tray for premium breakfast and catering."
       }
     ];
 
+    // State Variables
     let orderQuantities = {};
     let hotelProfile = JSON.parse(localStorage.getItem('sk_hotel_profile') || '{}');
     let activeCategory = 'all';
     let searchQuery = '';
+    let currentLang = localStorage.getItem('sk_lang') || 'en';
+
+    const TRANSLATIONS = {
+      en: {
+        langBtn: "🌐 தமிழ்",
+        nightNotice: "🌙 Night Booking Open: 6:00 PM - 11:00 PM for Early Morning Delivery",
+        heroTitle: "Daily Wholesale Chicken Supply For <span>Hotels, Dhabas & Restaurants</span>",
+        heroSub: "Select your required Kgs below and submit your night order (6:00 PM - 11:00 PM). Dressed fresh and delivered at your hotel doorstep in the Early Morning!",
+        searchPlaceholder: "Search boneless, broiler, leg...",
+        allCats: "All Items (15)",
+        catBroiler: "🍗 Broiler Chicken",
+        catSpecial: "✨ Boneless & Special Cuts",
+        catCountry: "🐔 Country Chicken",
+        catOffal: "🫀 Liver & Gizzard",
+        catEggs: "🥚 Farm Fresh Eggs",
+        required: "Required",
+        quickAdd: "Quick Add:",
+        reviewOrder: "Review & Place Order",
+        itemsSelected: "items selected",
+        hotelPortal: "Hotel Order Portal",
+        hotelBannerTitle: "Ordering for your Restaurant / Hotel?",
+        hotelBannerSub: "Click below to save hotel details once for 1-tap fast reorders.",
+        setHotelDetails: "Set Hotel Details"
+      },
+      ta: {
+        langBtn: "🌐 English",
+        nightNotice: "🌙 இரவு புக்கிங்: மாலை 6:00 - இரவு 11:00 மணி வரை (அதிகாலை டெலிவரி)",
+        heroTitle: "ஹோட்டல் & தாபாக்களுக்கான <span>மொத்த சிக்கன் சப்ளை</span>",
+        heroSub: "உங்களுக்கு தேவையான கிலோவை கீழே தேர்வு செய்து இரவு 11:00 மணிக்குள் ஆர்டர் செய்யுங்கள். அதிகாலையில் உங்கள் ஹோட்டலுக்கே வந்து சேரும்!",
+        searchPlaceholder: "போன்லெஸ், பிராய்லர், லெக் தேட...",
+        allCats: "அனைத்து பொருட்கள் (15)",
+        catBroiler: "🍗 பிராய்லர் கோழி",
+        catSpecial: "✨ போன்லெஸ் & ஸ்பெஷல் கட்",
+        catCountry: "🐔 நாட்டுக்கோழி",
+        catOffal: "🫀 ஈரல் & ஜிizzard",
+        catEggs: "🥚 பண்ணை முட்டைகள்",
+        required: "தேவைப்படும்",
+        quickAdd: "விரைவு அளவு:",
+        reviewOrder: "பில் பார்த்து ஆர்டர் செய்க",
+        itemsSelected: "பொருட்கள் தேர்வு",
+        hotelPortal: "ஹோட்டல் ஆர்டர் தளம்",
+        hotelBannerTitle: "உங்கள் ஹோட்டலுக்கு ஆர்டர் செய்கிறீர்களா?",
+        hotelBannerSub: "ஹோட்டல் விவரங்களை ஒருமுறை சேமித்து விரைவாக ஆர்டர் செய்யுங்கள்.",
+        setHotelDetails: "விவரங்களை மாற்றுக"
+      }
+    };
+
+    const TAMIL_ITEM_NAMES = {
+      item_broiler_skinless: { name: "பிராய்லர் சிக்கன் - ஸ்கின்லெஸ்", desc: "தோல் உரிக்கப்பட்ட சுத்தமான பிராய்லர் கோழி இறைச்சி." },
+      item_broiler_withskin: { name: "பிராய்லர் சிக்கன் - தோலுடன்", desc: "தோலுடன் கூடிய முழு பிராய்லர் சிக்கன் (கிரில், வறுவல், தாபா ஸ்பெஷல்)." },
+      item_boneless_breast: { name: "போன்லெஸ் பிரஸ்ட் கட் (எலும்பில்லாதது)", desc: "100% சுத்தமான போன்லெஸ் இறைச்சி (சில்லி சிக்கன், 65 மற்றும் ஷவர்மாவுக்கு சிறந்தது)." },
+      item_leg_thigh_cuts: { name: "லெக் & தொடை பீஸ்கள்", desc: "பிரியாணி, லெக் ரோஸ்ட் மற்றும் தந்தூரிக்கு ஏற்ற தரமான லெக் பீஸ்கள்." },
+      item_chicken_lollipop: { name: "சிக்கன் லாலிபாப் கட்", desc: "ஹோட்டல் ஸ்டைல் சிக்கன் லாலிபாப் செய்ய வெட்டப்பட்ட விங்லெட்டுகள்." },
+      item_chicken_wings: { name: "சிக்கன் விங்ஸ் (இறக்கைகள்)", desc: "பிரைடு சிக்கன் மற்றும் சைனீஸ் கிரேவிக்கு உகந்த விங்ஸ்." },
+      item_country_chicken: { name: "நாட்டுக்கோழி இறைச்சி", desc: "உண்மையான நாட்டுக்கோழி - சூப், சுக்கா மற்றும் அசல் கிராமத்து குழம்புக்கு சிறந்தது." },
+      item_liver_gizzard: { name: "சிக்கன் ஈரல் & ஜிizzard", desc: "சுத்தப்படுத்தப்பட்ட ஃப்ரெஷ் ஈரல் - சுக்கா மற்றும் வறுவலுக்கு அதிக தேவை." },
+      item_chicken_keema: { name: "சிக்கன் கொத்துக்கறி / கீமா", desc: "கீமா தோசை, சமோசா மற்றும் ரோல்களுக்கான பொடியாக நறுக்கப்பட்ட சிக்கன்." },
+      item_farm_eggs_tray: { name: "பண்ணை முட்டை டிரே (30 முட்டைகள்)", desc: "தினசரி பண்ணை முட்டைகள் டிரே - புரோட்டா, ரைஸ் மற்றும் பிரியாணிக்கு சிறந்தது." },
+      item_kadaknath_black: { name: "கடக்நாத் கருங்கோழி இறைச்சி", desc: "அசல் கருங்கோழி இறைச்சி - அதிக புரதம் மற்றும் மருத்துவ குணம் வாய்ந்தது." },
+      item_quail_kaadai: { name: "பண்ணை காடை இறைச்சி", desc: "சுத்தப்படுத்தப்பட்ட முழு காடைகள் - காடை ஃப்ரை மற்றும் ரோஸ்டிற்கு சிறந்தது." },
+      item_drumstick_only: { name: "சிக்கன் டிரங்க்ஸ்டிக் (தனி லெக்)", desc: "தனி லெக் பீஸ்கள் - தந்தூரி, பிரைடு சிக்கன் மற்றும் பார்பிக்யூ ஸ்பெஷல்." },
+      item_duck_vaathu: { name: "பண்ணை வாத்து இறைச்சி", desc: "செட்டிநாடு வாத்து வறுவல் மற்றும் பாரம்பரிய குழம்புக்கு உகந்த வாத்து இறைச்சி." },
+      item_country_eggs_tray: { name: "நாட்டுக்கோழி முட்டை டிரே (30 pcs)", desc: "அசல் நாட்டுக்கோழி முட்டைகள் டிரே - அதிக சத்து நிறைந்தது." }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ta' : 'en';
+      localStorage.setItem('sk_lang', currentLang);
+      applyLanguage();
+    }
+
+    function applyLanguage() {
+      const t = TRANSLATIONS[currentLang];
+      const langLabel = document.getElementById('lang-btn-label');
+      if (langLabel) langLabel.textContent = t.langBtn;
+
+      const noticeText = document.getElementById('night-notice-text');
+      if (noticeText) noticeText.textContent = t.nightNotice;
+
+      const heroTitle = document.querySelector('.hero-banner-title');
+      if (heroTitle) heroTitle.innerHTML = t.heroTitle;
+
+      const heroSub = document.querySelector('.hero-banner-sub');
+      if (heroSub) heroSub.textContent = t.heroSub;
+
+      const searchInput = document.getElementById('item-search-input');
+      if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+      const hotelLabel = document.getElementById('saved-hotel-label');
+      if (hotelLabel && !hotelProfile.hotelName) hotelLabel.textContent = t.hotelPortal;
+
+      const bannerTitle = document.getElementById('banner-hotel-name');
+      if (bannerTitle && !hotelProfile.hotelName) bannerTitle.textContent = t.hotelBannerTitle;
+
+      const bannerMeta = document.getElementById('banner-hotel-meta');
+      if (bannerMeta && !hotelProfile.hotelName) bannerMeta.textContent = t.hotelBannerSub;
+
+      // Update category button texts
+      const catBtns = document.querySelectorAll('.cat-btn');
+      if (catBtns.length >= 6) {
+        catBtns[0].innerHTML = `<i class="bi bi-grid-fill"></i> ${t.allCats}`;
+        catBtns[1].textContent = t.catBroiler;
+        catBtns[2].textContent = t.catSpecial;
+        catBtns[3].textContent = t.catCountry;
+        catBtns[4].textContent = t.catOffal;
+        catBtns[5].textContent = t.catEggs;
+      }
+
+      renderDropdownOptions();
+      renderPoultryItems();
+      updateStickySummary();
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       initB2BPortal();
     });
 
     function initB2BPortal() {
-      renderDropdownOptions();
-      renderPoultryItems();
+      applyLanguage();
       updateHotelProfileBanner();
-      updateStickySummary();
     }
 
     function renderDropdownOptions() {
@@ -798,6 +1040,8 @@
       const grid = document.getElementById('poultry-items-grid');
       if (!grid) return;
 
+      const t = TRANSLATIONS[currentLang];
+
       const filteredItems = POULTRY_ITEMS.filter(item => {
         const matchesCategory = (activeCategory === 'all') || (item.category === activeCategory);
         const matchesSearch = (!searchQuery) || item.name.toLowerCase().includes(searchQuery) || item.description.toLowerCase().includes(searchQuery);
@@ -821,21 +1065,29 @@
         const qty = orderQuantities[item.id] || 0;
         const hasOrderedClass = qty > 0 ? 'has-ordered' : '';
 
+        // Dynamic name/desc based on currentLang
+        let displayName = item.name;
+        let displayDesc = item.description;
+        if (currentLang === 'ta' && TAMIL_ITEM_NAMES[item.id]) {
+          displayName = TAMIL_ITEM_NAMES[item.id].name;
+          displayDesc = TAMIL_ITEM_NAMES[item.id].desc;
+        }
+
         return `
           <div class="item-card ${hasOrderedClass}" id="card-${item.id}">
             <div class="item-card-header">
               <div class="item-media">
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
+                <img src="${item.image}" alt="${displayName}" loading="lazy">
               </div>
               <div class="item-details">
-                <h4 class="item-title">${item.name}</h4>
-                <p class="item-desc">${item.description}</p>
+                <h4 class="item-title">${displayName}</h4>
+                <p class="item-desc">${displayDesc}</p>
                 <span class="item-unit-badge">Unit: ${item.unit}</span>
               </div>
             </div>
 
             <div class="stepper-row">
-              <span class="stepper-title">Required ${item.unit}:</span>
+              <span class="stepper-title">${t.required} ${item.unit}:</span>
               <div class="stepper-actions">
                 <button type="button" class="btn-step" onclick="adjustItemQty('${item.id}', -1)">-</button>
                 <input type="number" class="input-stepper-val" id="input-${item.id}" value="${qty}" min="0" step="1" oninput="onManualQtyChange('${item.id}', this.value)">
@@ -844,7 +1096,7 @@
             </div>
 
             <div class="bulk-chips-wrapper">
-              <span class="bulk-chip-title">Quick Add:</span>
+              <span class="bulk-chip-title">${t.quickAdd}</span>
               ${item.quickAddKgs.map(k => `
                 <button type="button" class="bulk-chip" onclick="quickSetQty('${item.id}', ${k})">+${k} ${item.unit}</button>
               `).join('')}
@@ -966,11 +1218,11 @@
 
       if (hotelProfile.hotelName) {
         document.getElementById('form-hotel-name').value = hotelProfile.hotelName || '';
-        document.getElementById('form-hotel-type').value = hotelProfile.hotelType || HOTEL_TYPES[0];
         document.getElementById('form-contact-person').value = hotelProfile.contactPerson || '';
         document.getElementById('form-phone').value = hotelProfile.phone || '';
         document.getElementById('form-address').value = hotelProfile.address || '';
       }
+      syncBizCategoryChips(hotelProfile.hotelType || 'Biryani Speciality Hotel');
 
       const overlay = document.getElementById('order-modal-overlay');
       if (overlay) overlay.classList.add('active');
@@ -996,6 +1248,26 @@
       }
     }
 
+    function selectBizCategory(btn, value) {
+      document.querySelectorAll('.biz-chip').forEach(c => c.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const hiddenInput = document.getElementById('form-hotel-type');
+      if (hiddenInput) hiddenInput.value = value;
+    }
+
+    function syncBizCategoryChips(val) {
+      const selectedVal = val || 'Restaurant';
+      document.querySelectorAll('.biz-chip').forEach(c => {
+        if (c.getAttribute('data-val') === selectedVal) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+      const hiddenInput = document.getElementById('form-hotel-type');
+      if (hiddenInput) hiddenInput.value = selectedVal;
+    }
+
     function openProfileModal() {
       document.getElementById('quick-hotel-name').value = hotelProfile.hotelName || '';
       document.getElementById('quick-contact-person').value = hotelProfile.contactPerson || '';
@@ -1016,10 +1288,16 @@
 
     function saveProfileSettings(e) {
       e.preventDefault();
+      const phone = document.getElementById('quick-phone').value.trim();
+      if (phone.length !== 10) {
+        showToast('Please enter a valid 10-digit phone number!');
+        return;
+      }
+
       hotelProfile = {
         hotelName: document.getElementById('quick-hotel-name').value.trim(),
         contactPerson: document.getElementById('quick-contact-person').value.trim(),
-        phone: document.getElementById('quick-phone').value.trim(),
+        phone: phone,
         address: document.getElementById('quick-address').value.trim()
       };
 
@@ -1036,9 +1314,14 @@
       const hotelType = document.getElementById('form-hotel-type').value;
       const contactPerson = document.getElementById('form-contact-person').value.trim();
       const phone = document.getElementById('form-phone').value.trim();
+
+      if (phone.length !== 10) {
+        showToast('Please enter a valid 10-digit mobile number!');
+        return;
+      }
       const address = document.getElementById('form-address').value.trim();
       const deliverySlot = document.getElementById('form-delivery-slot').value;
-      const cuttingStyle = document.getElementById('form-cutting-style').value;
+      const cuttingStyle = document.getElementById('form-cutting-style').value || 'Standard Cut';
       const notes = document.getElementById('form-notes').value.trim();
 
       hotelProfile = { hotelName, hotelType, contactPerson, phone, address };
@@ -1125,26 +1408,25 @@
         } catch (e) {}
       }
 
-      let waMessage = `🍗 *${STORE_CONFIG.storeName.toUpperCase()} - WHOLESALE CHICKEN ORDER* 🌿\n`;
-      waMessage += `----------------------------------------\n`;
-      waMessage += `🏨 *Hotel / Restaurant:* ${hotelName}\n`;
-      waMessage += `📋 *Category:* ${hotelType}\n`;
-      waMessage += `👤 *Chef / Contact:* ${contactPerson}\n`;
-      waMessage += `📞 *Phone:* ${phone}\n`;
-      waMessage += `📍 *Delivery Area:* ${address}\n`;
-      waMessage += `⏰ *Delivery Time:* ${deliverySlot}\n`;
-      waMessage += `🔪 *Cutting Style:* ${cuttingStyle}\n`;
-      waMessage += `\n📦 *ORDERED ITEMS DETAILS:*\n`;
+      // WhatsApp Message (Clean Option C Format)
+      let waMessage = `*${STORE_CONFIG.storeName.toUpperCase()} - NEW MORNING ORDER*\n\n`;
+      waMessage += `Hotel: *${hotelName}*\n`;
+      waMessage += `Contact: *${contactPerson} (${phone})*\n`;
+      waMessage += `Area: *${address}*\n`;
+      waMessage += `Time: *${deliverySlot}*\n`;
+      waMessage += `Prep: *${cuttingStyle}*\n\n`;
+      waMessage += `*Items Ordered:*\n`;
 
-      orderedItemsList.forEach((item, index) => {
-        waMessage += `${index + 1}. *${item.name}*: ${item.qty} ${item.unit}\n`;
+      orderedItemsList.forEach((item) => {
+        const cleanItemName = item.name.split('(')[0].trim();
+        waMessage += `• ${cleanItemName} = *${item.qty} ${item.unit}*\n`;
       });
 
-      waMessage += `\n----------------------------------------\n`;
-      waMessage += `⭐ *TOTAL ORDER WEIGHT:* ${totalUnitsText}\n`;
-      if (notes) waMessage += `📝 *Special Notes:* ${notes}\n`;
-      waMessage += `----------------------------------------\n`;
-      waMessage += `Please confirm this early morning supply booking. Thank you!`;
+      waMessage += `\n*TOTAL WEIGHT = ${totalUnitsText.toUpperCase()}*\n\n`;
+      if (notes) {
+        waMessage += `Notes: *${notes}*\n\n`;
+      }
+      waMessage += `Confirm delivery. Thank you.`;
 
       const waUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
 
@@ -1155,7 +1437,7 @@
 
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i class="bi bi-send-check-fill"></i> <span>Confirm & Send Order (Google Sheets + WhatsApp)</span>`;
+        submitBtn.innerHTML = `<i class="bi bi-send-check-fill"></i> <span>Place the Order Confirm</span>`;
       }
 
       showToast(`Order recorded for ${totalUnitsText}! Opening WhatsApp...`);

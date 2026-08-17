@@ -1,76 +1,74 @@
-# 🌿 SK Foods - Organic & Farm Fresh Groceries Online Store
+# 🍗 SK Foods - B2B Wholesale Chicken & Poultry Supply Web Portal
 
-A fast, responsive, modern E-Commerce web application built for **SK Foods** with zero backend hosting costs. Fully optimized for **100% Free Hosting on GitHub Pages**.
+Dedicated mobile-first B2B wholesale poultry supply web app for **Restaurants, Hotels, Dhabas, Biryani Centers, Mess, and Fast Food Outlets**.
 
 ---
 
 ## 🌟 Key Features
 
-1. **🛍️ Product Catalog & Variants**:
-   - Multiple weight/size options (e.g. 500ml / 1L / 5L for oils, 250g / 500g / 1kg for millets & spices).
-   - Dynamic price calculation based on selected variant.
-   - Quick View Modal with health highlights, certified organic tags, and customer ratings.
+1. **📱 100% Mobile-First High-Speed UI/UX**:
+   - Designed for hotel managers and chefs ordering on smartphones late at night.
+   - 1-tap quick add bulk chips (`+5 Kg`, `+10 Kg`, `+25 Kg`, `+50 Kg`) and numeric stepper.
+   - Sticky bottom mobile summary bar showing live total Kgs.
 
-2. **📱 Instant WhatsApp Ordering**:
-   - Converts the customer's cart items, quantities, coupon discount, delivery fee, and address into a neat receipt.
-   - One-click order dispatch straight to the merchant's WhatsApp.
+2. **🚫 NO PRICE IN BILL (Only Units & Kgs)**:
+   - Daily fluctuating poultry rates are handled via wholesale terms.
+   - The web app and bills strictly track **Quantities & Weights in Kg / Trays** with zero price confusion.
 
-3. **💳 Payment Modes & UPI QR**:
-   - Cash on Delivery (COD) mode.
-   - Dynamic UPI QR Code generator for Google Pay, PhonePe, Paytm, BHIM.
+3. **📊 100% Automated Google Sheet Logging (10-Item Columns)**:
+   - Every hotel order automatically creates a structured row in your Google Sheet with separate columns for each of the 10 poultry items:
+     - `Broiler Skinless (Kg)`
+     - `Broiler With Skin (Kg)`
+     - `Boneless Breast (Kg)`
+     - `Leg & Thigh Pieces (Kg)`
+     - `Chicken Lollipop (Kg/Pcs)`
+     - `Chicken Wings (Kg)`
+     - `Country Chicken / Naatu Kozhi (Kg)`
+     - `Liver & Gizzard (Kg)`
+     - `Chicken Minced / Keema (Kg)`
+     - `Farm Eggs (Trays - 30 Pcs)`
+     - *Plus Hotel Name, Contact, Phone, Delivery Slot, Cutting Style, Total Kgs, and Notes.*
 
-4. **🎟️ Discount Coupons & Free Delivery Tracker**:
-   - Pre-configured discount coupons (`SKFIRST`, `ORGANIC50`, `FARM100`).
-   - Interactive progress bar for Free Delivery above ₹499.
-
-5. **🌐 Bilingual Support**:
-   - One-click toggle between English and Tamil (தமிழ்).
-
-6. **⚡ Zero Hosting Cost (100% Free)**:
-   - Built with pure HTML5, CSS3, and modern JavaScript.
-   - Runs directly on GitHub Pages with 0 server maintenance charges.
-
----
-
-## 🚀 How to Host for FREE on GitHub Pages (தமிழ் & English)
-
-### Step 1: Create a GitHub Account & Repository
-1. Go to [github.com](https://github.com/) and sign up or sign in (Free).
-2. Click **New Repository** (`+` icon at top right).
-3. Name your repository (e.g., `sk-foods` or `organic-store`).
-4. Set visibility to **Public** and click **Create Repository**.
-
-### Step 2: Upload Website Files
-1. On your new repository page, click **Upload files**.
-2. Drag and drop all the files from this folder (`index.html`, `style.css`, `app.js`, `data.js`).
-3. Click **Commit changes**.
-
-### Step 3: Enable GitHub Pages (Free Hosting)
-1. In your GitHub repository, click on **Settings** (top tab).
-2. In the left sidebar, click on **Pages**.
-3. Under **Branch**, select `main` (or `master`) and folder `/ (root)`.
-4. Click **Save**.
-5. Within 1 minute, your website will be LIVE at:
-   `https://<your-username>.github.io/<repository-name>/`
+4. **📲 Instant WhatsApp Bill Dispatch**:
+   - Simultaneously prepares a formatted receipt and opens WhatsApp for instant order confirmation.
 
 ---
 
-## 🛠️ How to Customize Your Store Details
+## 🚀 Google Sheets 100% Free Setup (2 Minutes Step-by-Step)
 
-Open `data.js` to easily change:
-- **Merchant WhatsApp number**: Change `STORE_CONFIG.whatsappNumber` to your own number (e.g., `919876543210`).
-- **Store Name & Address**: Update `STORE_CONFIG.storeName` and `STORE_CONFIG.address`.
-- **UPI ID**: Set your own UPI ID in `STORE_CONFIG.upiId` (e.g., `yourname@okaxis` or `merchant@upi`).
-- **Products & Prices**: Add, edit, or delete items inside the `PRODUCTS` list in `data.js`.
+### Step 1: Create a Google Spreadsheet
+1. Open [Google Sheets](https://sheets.google.com) and click **+ Blank Spreadsheet**.
+2. Name it: `SK Foods - Daily Hotel Chicken Orders`.
+
+### Step 2: Add Google Apps Script
+1. In the Google Sheets top menu, click **Extensions** -> **Apps Script**.
+2. Delete any default code in `Code.gs`.
+3. Open the [`google_apps_script.js`](./google_apps_script.js) file from this folder, copy all code, and paste it into Apps Script.
+4. Click the **Save** icon (💾).
+
+### Step 3: Deploy as Web App
+1. Click the blue **Deploy** button (top right) -> **New deployment**.
+2. Click the gear icon (⚙️) next to *Select type* and choose **Web app**.
+3. Set:
+   - **Execute as:** `Me (your email)`
+   - **Who has access:** `Anyone` *(Crucial!)*
+4. Click **Deploy** and authorize access if prompted.
+5. Copy the generated **Web app URL** (e.g. `https://script.google.com/macros/s/.../exec`).
+
+### Step 4: Paste URL into `data.js`
+1. Open [`data.js`](./data.js) and paste your URL:
+   ```javascript
+   STORE_CONFIG.googleSheetScriptUrl = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+   ```
+2. Also check that `STORE_CONFIG.whatsappNumber` has your WhatsApp number (e.g. `919876543210`).
 
 ---
 
-## 💻 Local Testing
+## 🌐 Updating GitHub Pages
 
-You can open `index.html` directly in any web browser (Chrome, Edge, Safari, Firefox), or run a lightweight local server:
-
-```powershell
-# In PowerShell / Terminal:
-python -m http.server 8000
-# Then open http://localhost:8000 in your browser
-```
+1. Go to your GitHub repository: `https://github.com/SkFood/sk-foods-live`
+2. Click **Add file ▾** -> **Upload files**.
+3. Drag & drop the updated `index.html`, `style.css`, `data.js`, `app.js`, and `README.md`.
+4. Click **Commit changes**.
+5. Within 1 minute, your updated B2B Chicken Supply portal will be live at:
+   👉 **`https://skfood.github.io/sk-foods-live/`**
