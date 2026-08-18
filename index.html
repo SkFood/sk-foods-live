@@ -1357,11 +1357,8 @@
 
       const payloadString = JSON.stringify(sheetPayload);
 
-      // Send to Google Sheets via Triple Fallback (Fetch POST + Fetch GET + Hidden Form)
+      // Send to Google Sheets via single clean Fetch POST
       if (STORE_CONFIG.googleSheetScriptUrl && STORE_CONFIG.googleSheetScriptUrl.startsWith('https://script.google.com')) {
-        const encodedPayload = encodeURIComponent(payloadString);
-        
-        // 1. Fetch POST
         try {
           fetch(STORE_CONFIG.googleSheetScriptUrl, {
             method: 'POST',
@@ -1369,33 +1366,6 @@
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: payloadString
           }).catch(err => {});
-        } catch (e) {}
-
-        // 2. Fetch GET fallback
-        try {
-          fetch(STORE_CONFIG.googleSheetScriptUrl + '?payload=' + encodedPayload, {
-            method: 'GET',
-            mode: 'no-cors'
-          }).catch(err => {});
-        } catch (e) {}
-
-        // 3. Hidden Form Submit fallback
-        try {
-          const hiddenForm = document.createElement('form');
-          hiddenForm.action = STORE_CONFIG.googleSheetScriptUrl;
-          hiddenForm.method = 'POST';
-          hiddenForm.target = 'hidden_sheet_iframe';
-          hiddenForm.style.display = 'none';
-
-          const payloadInput = document.createElement('input');
-          payloadInput.type = 'hidden';
-          payloadInput.name = 'payload';
-          payloadInput.value = payloadString;
-
-          hiddenForm.appendChild(payloadInput);
-          document.body.appendChild(hiddenForm);
-          hiddenForm.submit();
-          setTimeout(() => hiddenForm.remove(), 2000);
         } catch (e) {}
       }
 

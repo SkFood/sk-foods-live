@@ -81,12 +81,13 @@ function renderPoultryItems() {
   grid.innerHTML = filteredItems.map(item => {
     const qty = orderQuantities[item.id] || 0;
     const hasOrderedClass = qty > 0 ? 'has-ordered' : '';
+    const svgFallback = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><rect width='120' height='120' rx='12' fill='%23fff1f2'/><text x='50%' y='45%' dominant-baseline='middle' text-anchor='middle' font-size='46'>🍗</text><text x='50%' y='78%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='10' font-weight='900' fill='%23e11d48'>SK FOODS</text></svg>";
 
     return `
       <div class="item-card ${hasOrderedClass}" id="card-${item.id}">
         <div class="item-card-header">
           <div class="item-media">
-            <img src="${item.image}" alt="${item.name}" loading="lazy">
+            <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.onerror=null; this.src='${svgFallback}';">
           </div>
           <div class="item-details">
             <h4 class="item-title">${item.name}</h4>
@@ -414,11 +415,8 @@ async function handleOrderSubmission(e) {
 
   const payloadString = JSON.stringify(sheetPayload);
 
-  // Send to Google Sheets via Triple Fallback (Fetch POST + Fetch GET + Hidden Form)
+  // Send to Google Sheets via single clean Fetch POST
   if (STORE_CONFIG.googleSheetScriptUrl && STORE_CONFIG.googleSheetScriptUrl.startsWith('https://script.google.com')) {
-    const encodedPayload = encodeURIComponent(payloadString);
-
-    // 1. Fetch POST
     try {
       fetch(STORE_CONFIG.googleSheetScriptUrl, {
         method: 'POST',
@@ -426,33 +424,6 @@ async function handleOrderSubmission(e) {
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: payloadString
       }).catch(err => {});
-    } catch (e) {}
-
-    // 2. Fetch GET fallback
-    try {
-      fetch(STORE_CONFIG.googleSheetScriptUrl + '?payload=' + encodedPayload, {
-        method: 'GET',
-        mode: 'no-cors'
-      }).catch(err => {});
-    } catch (e) {}
-
-    // 3. Hidden Form Submit fallback
-    try {
-      const hiddenForm = document.createElement('form');
-      hiddenForm.action = STORE_CONFIG.googleSheetScriptUrl;
-      hiddenForm.method = 'POST';
-      hiddenForm.target = 'hidden_sheet_iframe';
-      hiddenForm.style.display = 'none';
-
-      const payloadInput = document.createElement('input');
-      payloadInput.type = 'hidden';
-      payloadInput.name = 'payload';
-      payloadInput.value = payloadString;
-
-      hiddenForm.appendChild(payloadInput);
-      document.body.appendChild(hiddenForm);
-      hiddenForm.submit();
-      setTimeout(() => hiddenForm.remove(), 2000);
     } catch (e) {}
   }
 
